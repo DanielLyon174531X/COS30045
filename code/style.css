@@ -1,54 +1,147 @@
 /* author: Daniel Lyon 174531x */
 body {
-  font-family: sans-serif;
+  font-family: "Segoe UI", sans-serif;
   margin: 0;
   padding: 0;
-  background: #f5f5f5;
+  background: #f0f2f5;
+  color: #222;
+  line-height: 1.6;
 }
 
-header,
-nav,
-section {
-  padding: 1rem 2rem;
+header {
+  background-color: #007acc;
+  color: white;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+  margin: 0 0 0.5rem;
+  font-size: 2rem;
+  color: white;
 }
 
 nav {
   background: #222;
-  color: white;
+  padding: 1rem 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  justify-content: center;
 }
 
 nav a {
   color: white;
-  margin-right: 1rem;
   text-decoration: none;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
 }
 
-h2 {
+nav a:hover {
+  text-decoration: underline;
+  color: #00bfff;
+}
+
+.chart,
+.content,
+.summary,
+.analysis,
+.sources {
+  background: white;
+  padding: 2rem;
+  margin: 2rem auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  max-width: 960px;
+}
+
+h1,
+h2,
+h3 {
+  color: #007acc;
   margin-top: 0;
 }
 
-.chart {
-  background: white;
-  padding: 1rem;
-  margin-top: 1rem;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+.chart h2,
+.content h1 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
 }
 
 svg {
   width: 100%;
-  height: 400px;
+  height: auto;
+  display: block;
+  margin: auto;
 }
 
 .site-footer {
+  background: #f5f5f5;
+  text-align: center;
   padding: 1rem 2rem;
   font-size: 0.9rem;
   color: #555;
-  text-align: center;
 }
 
 .tooltip {
   font-size: 0.9rem;
   font-family: sans-serif;
+  background: #333;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 4px;
+  pointer-events: none;
+  position: absolute;
+  opacity: 0;
   box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+/* === Summary and Analysis Sections === */
+.summary,
+.analysis {
+  background-color: #f9f9f9;
+  border-left: 5px solid #007acc;
+  padding: 1.5rem 2rem;
+  margin: 3rem auto;
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.summary h2,
+.analysis h2 {
+  margin-top: 0;
+  color: #007acc;
+  font-size: 1.5rem;
+}
+
+/* === Source Citation === */
+.source,
+.sources {
+  font-size: 0.9em;
+  color: #555;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+.source a,
+.sources a {
+  color: #005fa3;
+  text-decoration: none;
+}
+
+.source a:hover,
+.sources a:hover {
+  text-decoration: underline;
+}
+
+ul {
+  padding-left: 1.5rem;
+}
+
+ul li {
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
 }
