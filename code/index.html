@@ -1,29 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>COS30045 - OECD Health Visualisation</title>
+    <meta name="author" content="Daniel Lyon - 174531X" />
+    <!-- ========== Stylesheets ========== -->
+    <link rel="stylesheet" href="style.css" />
 
-<head>
-    <meta charset="UTF-8">
-    <title>Team 01I - OECD Health Visualisation</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-</head>
+    <!-- ========== Libraries ========== -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
 
-<body>
+    <!-- ========== Chart Scripts ========== -->
+    <script src="scripts/bar-chart.js"></script>
+    <script src="scripts/line-chart.js"></script>
+    <script src="scripts/scatterplot.js"></script>
+  </head>
 
+  <body>
     <header>
-        <h1>OECD Health Statistics Visualisation</h1>
-        <h2>Team 01I - COS30045 Data Visualisation Project</h2>
+      <h1>COS30045 - OECD Health Visualisation</h1>
+      <p>
+        Exploring hospital expenditure and perceived health status across
+        countries
+      </p>
     </header>
 
-    <main>
-        <p>This website will host our interactive data visualisation based on OECD Health Statistics.</p>
-        <p>Development is currently in progress.</p>
-    </main>
+    <nav>
+      <a href="#bar">Hospital Expenditure</a>
+      <a href="#line">Perceived Health Over Time</a>
+      <a href="#scatter">Spending vs Health Gap</a>
+    </nav>
 
-    <footer>
-        <p>Teaching Period 1, 2025 | Daniel Lyon 174531X | Spencer Larson 104004679</p>
+    <section id="intro" class="content">
+      <h1>OECD Health Expenditure Data Exploration</h1>
+      <p>
+        This website presents interactive data visualisations based on OECD
+        Health Statistics. The project aims to explore how different countries
+        allocate public resources to healthcare, particularly hospital
+        expenditure as a percentage of GDP. By examining these patterns
+        alongside other health indicators in future charts, we seek to highlight
+        the importance of sustained investment in public health systems for
+        better outcomes and equity.
+      </p>
+    </section>
+
+    <section id="bar" class="chart">
+      <h2>Hospital Expenditure (% GDP) by Country - 2016</h2>
+      <div id="bar-chart"></div>
+      <p class="figure-caption">
+        <strong>Figure 1.</strong> Hospital expenditure (% of GDP) by country,
+        2016
+      </p>
+      <section class="analysis">
+        <h3>Chart Analysis: Hospital Expenditure as % of GDP (2016)</h3>
+        <p>
+          This bar chart visualizes the percentage of GDP that 34 countries
+          allocated to hospital services in 2016. Denmark leads the group at
+          4.689%, followed closely by Japan, Greece, and Australia—all exceeding
+          3.6%. At the other end of the scale, countries such as the United
+          Kingdom (1.162%), Luxembourg (1.327%), and Sweden (1.342%) allocated
+          relatively little to hospital expenditure.
+        </p>
+        <p>
+          From a public health policy perspective, this distribution raises
+          important questions about the prioritisation of healthcare within
+          national budgets. While GDP percentages do not capture the full
+          complexity of a nation’s health system, they do reflect government and
+          system-level commitment to hospital infrastructure and services—a
+          critical pillar of public health capacity.
+        </p>
+        <p>
+          Notably, several high-income countries with advanced healthcare
+          systems (e.g. Germany, France, Canada) still fall below 3.5% of GDP in
+          hospital spending. This suggests that even among OECD nations,
+          investment in hospital services varies considerably despite similar
+          economic capacities.
+        </p>
+        <p>
+          For researchers and policymakers advocating for increased public
+          health funding, this visualisation serves as a compelling starting
+          point. It highlights significant disparities and invites deeper
+          exploration of the relationship between hospital spending and health
+          outcomes (e.g. life expectancy, avoidable mortality, or patient
+          satisfaction). As additional datasets are incorporated into this
+          project—such as perceived health status, healthcare access equity, and
+          preventative care spending—we aim to show that nations investing more
+          consistently in health tend to achieve better public health outcomes.
+        </p>
+        <p>
+          <strong>Data note:</strong> Israel was excluded from the visualisation
+          due to its exceptionally low value (~0.218%), which resulted in a bar
+          too small to display effectively within the chart's dimensions. The
+          data remains available in the original dataset.
+        </p>
+      </section>
+    </section>
+
+    <section id="line" class="chart">
+      <h2>Perceived Health Status Over Time</h2>
+      <label for="country-select">Select Country:</label>
+      <select id="country-select"></select>
+      <div id="line-chart"></div>
+    </section>
+
+    <section id="scatter" class="chart">
+      <h2>Spending vs Health Gap</h2>
+      <div id="scatterplot"></div>
+    </section>
+
+    <footer class="site-footer">
+      Daniel Lyon - 174531x <br />COS30045 Assignment 3
     </footer>
-
-</body>
-
+  </body>
 </html>
