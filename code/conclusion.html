@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Project Conclusion – OECD Health Visualisation</title>
+    <meta name="author" content="Daniel Lyon - 174531X" />
+    <!-- ========== Stylesheets ========== -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <header>
+      <h1>COS30045 Assignment 3</h1>
+      <p>OECD data-driven exploration of public health trends</p>
+    </header>
+    <nav>
+      <!-- Breadcrumb-style nav for quick switching between views -->
+      <a href="index.html">Home</a>
+      <a href="health-expenditure.html">Health Expenditure</a>
+      <a href="perceived-health.html">Perceived Health Status</a>
+      <a href="cross-analysis.html">Cross-Analysis</a>
+      <a href="conclusion.html" aria-current="page">Conclusion</a>
+    </nav>
+
+    <main>
+      <section id="project-conclusion" class="summary">
+        <h2>Project Conclusion</h2>
+
+        <p>
+          This project set out to explore international public health trends
+          using interactive, data-driven visualisations. Our primary aim was to
+          examine how different nations invest in hospital services, and how
+          those investments might relate to people’s self-reported health —
+          particularly across income groups.
+        </p>
+
+        <p>
+          Over the course of development, we implemented a full pipeline from
+          data sourcing and cleaning to JSON transformation and interactive
+          chart design using D3.js. The visualisations allow for user
+          interaction, comparisons across time and countries, and encourage
+          evidence-based reflection on public health spending.
+        </p>
+
+        <p>
+          Along the way, we encountered some challenges. Coordinating group
+          contributions proved difficult, and all design and technical tasks
+          were managed independently. However, this also offered a valuable
+          opportunity to gain confidence in a range of front-end and
+          data-processing skills — including HTML, CSS, JavaScript (D3), and
+          Python for data cleaning.
+        </p>
+
+        <p>
+          One of the key lessons from this project is the importance of
+          narrative structure in data visualisation. Building engaging,
+          interactive tools is only half the story — users also need clear,
+          contextual interpretation to understand what the data shows and why it
+          matters. We also learned the value of consistent code structure and
+          reusable components, especially when working across multiple datasets
+          and chart types.
+        </p>
+
+        <p>
+          While this website demonstrates a solid foundation in interactive data
+          visualisation, it is not as complex or feature-complete as originally
+          envisioned. Due to time constraints and an uneven distribution of
+          workload, several planned enhancements — including additional
+          datasets, interactive filters, and advanced styling — were not fully
+          implemented. However, this too was a valuable aspect of the learning
+          process. Projects often encounter challenges in collaboration, timing,
+          and scope, and adapting to those realities is part of developing both
+          technical and project management skills. Despite the limitations, this
+          experience has provided meaningful insight into the end-to-end process
+          of building and communicating with data.
+        </p>
+      </section>
+
+      <section id="features-implemented" class="summary">
+        <h2>Features Implemented</h2>
+        <ul>
+          <li>
+            <strong>Animated bar chart</strong> for hospital expenditure (% of
+            GDP), with each bar growing on page load.
+          </li>
+          <li>
+            <strong>Tooltip on hover</strong> for both bar and line charts,
+            providing precise values.
+          </li>
+          <li>
+            <strong>Country dropdown menu</strong> for the line chart, allowing
+            user-driven comparison across nations.
+          </li>
+          <li>
+            <strong>Clean code structure</strong> with functions split by
+            responsibility (e.g., axes rendering, line drawing, tooltips),
+            following <em>clean code principles</em>.
+          </li>
+          <li>
+            <strong>Consistent styling and layout</strong> across charts, using
+            reusable margins and scales.
+          </li>
+          <li>
+            <strong>Data preprocessing pipeline</strong> using Python to extract
+            and structure raw OECD data into clean JSON.
+          </li>
+        </ul>
+      </section>
+
+      <section id="data-sources" class="sources">
+        <h2>Data Sources</h2>
+        <p>
+          The data used in this prototype was obtained from the
+          <strong>OECD Data Explorer</strong>:
+        </p>
+        <ul>
+          <li>
+            <a
+              href="https://data-explorer.oecd.org/vis?lc=en&df[ds]=dsDisseminateFinalDMZ&df[id]=DSD_SHA%40DF_SHA&df[ag]=OECD.ELS.HD&dq=.A.EXP_HEALTH.PT_B1GQ...HC1.....&pd=2016%2C&to[TIME_PERIOD]=false&vw=tb/"
+              target="_blank"
+            >
+              Hospital Expenditure (% of GDP)
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://data-explorer.oecd.org/vis?lc=en&df[ds]=dsDisseminateFinalDMZ&df[id]=DSD_HEALTH_STAT%40DF_PHS_SES&df[ag]=OECD.ELS.HD&dq=JPN%2BGRC%2BDNK%2BFRA%2BSWE%2BDEU%2BNOR%2BGBR%2BUSA%2BNZL%2BCAN%2BAUS.A...Y_GE15._T.Q5%2BQ1....G..&pd=2016%2C&to[TIME_PERIOD]=false"
+              target="_blank"
+            >
+              Perceived Health Status by Income Quintile – 2016–2023
+            </a>
+          </li>
+        </ul>
+        <p>
+          Data was downloaded, cleaned using Python, and converted to JSON
+          format for use in D3.js visualisations.
+        </p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      Daniel Lyon - 174531x <br />
+      COS30045 Assignment 3
+    </footer>
+  </body>
+</html>

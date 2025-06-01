@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Perceived Health - COS30045</title>
+    <meta name="author" content="Daniel Lyon - 174531X" />
+    <!-- ========== Stylesheets ========== -->
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- ========== Libraries ========== -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+
+    <!-- ========== Chart Scripts ========== -->
+    <script src="scripts/line-chart.js"></script>
+  </head>
+
+  <body>
+    <header>
+      <h1>Perceived Health Over Time</h1>
+      <p>
+        Tracking self-reported health status across income groups and countries.
+      </p>
+    </header>
+    <nav>
+      <!-- Breadcrumb-style nav for quick switching between views -->
+      <a href="index.html">Home</a>
+      <a href="health-expenditure.html">Health Expenditure</a>
+      <a href="perceived-health.html">Perceived Health Status</a>
+      <a href="cross-analysis.html">Cross-Analysis</a>
+      <a href="conclusion.html" aria-current="page">Conclusion</a>
+    </nav>
+
+    <section id="intro" class="content">
+      <h1>Perceived Health Status by Income Quintile</h1>
+
+      <p>
+        This section visualises how citizens rate their own health over time,
+        split by income groups. The dataset spans 2016–2023 and highlights
+        health disparities based on socio-economic status.
+      </p>
+    </section>
+
+    <section id="line" class="chart">
+      <h2>Perceived Health Status Over Time</h2>
+      <label for="country-select">Select Country:</label>
+      <select id="country-select"></select>
+      <div id="line-chart"></div>
+      <figcaption>
+        <strong>Figure 2.</strong> Changes in the percentage of population
+        reporting good perceived health over time, by country and income group.
+      </figcaption>
+      <p class="source">
+        Source:
+        <a
+          href="https://data-explorer.oecd.org/vis?lc=en&df[ds]=dsDisseminateFinalDMZ&df[id]=DSD_HEALTH_STAT%40DF_PHS_SES&df[ag]=OECD.ELS.HD&dq=JPN%2BGRC%2BDNK%2BFRA%2BSWE%2BDEU%2BNOR%2BGBR%2BUSA%2BNZL%2BCAN%2BAUS.A...Y_GE15._T.Q5%2BQ1....G..&pd=2016%2C&to[TIME_PERIOD]=false"
+          target="_blank"
+        >
+          OECD Data Explorer – Perceived Health Status (2016–2023)
+        </a>
+      </p>
+      <section id="line-analysis" class="analysis">
+        <h3>Analysis of Perceived Health Status Over Time</h3>
+        <p>
+          This line chart tracks the percentage of people in selected countries
+          who report being in
+          <em>“good” or “very good” health</em>, broken down by income quintile
+          (Q1 = lowest 20%, Q5 = highest 20%) over multiple years.
+        </p>
+        <p>
+          A clear trend is visible across almost all countries:
+          <strong
+            >perceived health status dropped noticeably during the COVID-19
+            pandemic years (2020–2022)</strong
+          >. This decline affected both lower- and higher-income groups, but
+          often more sharply among those in the lowest income quintile. The data
+          highlights how health crises can
+          <strong>widen socio-economic disparities in well-being</strong>, even
+          in high-income nations.
+        </p>
+        <p>
+          One particularly striking case is <strong>Japan</strong>, where
+          perceived health status is significantly lower than in other countries
+          — for both low- and high-income groups. Even among Japan’s wealthiest
+          20%, fewer than 45% report being in good or very good health in recent
+          years. In contrast, high-income groups in other countries typically
+          report rates between 70% and 95%. This may reflect
+          <strong>Japan’s much older population</strong>, as older individuals
+          may be more likely to report lower perceived health, even when
+          objective health indicators like life expectancy remain high.
+        </p>
+        <p>
+          These patterns suggest that
+          <strong
+            >income and age demographics both strongly influence how people
+            perceive their own health</strong
+          >
+          — and that public health investments should consider not just clinical
+          outcomes, but also how people feel about their health, especially
+          during periods of crisis.
+        </p>
+      </section>
+    </section>
+    <footer class="site-footer">
+      Daniel Lyon - 174531x <br />COS30045 Assignment 3
+    </footer>
+  </body>
+</html>

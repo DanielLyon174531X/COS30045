@@ -1,0 +1,12 @@
+[
+  { "Country": "Canada", "Q1": 79.9, "Q5": 94.4 },
+  { "Country": "France", "Q1": 61.4, "Q5": 72.1 },
+  { "Country": "Germany", "Q1": 51.5, "Q5": 79.1 },
+  { "Country": "Greece", "Q1": 76.1, "Q5": 82.0 },
+  { "Country": "Japan", "Q1": 28.0, "Q5": 39.4 },
+  { "Country": "Denmark", "Q1": 66.0, "Q5": 83.9 },
+  { "Country": "United Kingdom", "Q1": 59.6, "Q5": 83.3 },
+  { "Country": "Sweden", "Q1": 63.6, "Q5": 86.1 },
+  { "Country": "Australia", "Q1": 84.1, "Q5": 93.0 },
+  { "Country": "Norway", "Q1": 69.0, "Q5": 86.1 }
+]

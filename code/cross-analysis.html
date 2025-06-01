@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Cross-Analysis - COS30045</title>
+    <meta name="author" content="Daniel Lyon - 174531X" />
+    <!-- ========== Stylesheets ========== -->
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- ========== Libraries ========== -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+
+    <!-- ========== Chart Scripts ========== -->
+    <script src="scripts/cross-analysis.js"></script>
+  </head>
+
+  <body>
+    <header>
+      <h1>Spending vs. Health Gap</h1>
+      <p>Comparing expenditure with public perception of health outcomes.</p>
+    </header>
+
+    <nav>
+      <!-- Breadcrumb-style nav for quick switching between views -->
+      <a href="index.html">Home</a>
+      <a href="health-expenditure.html">Health Expenditure</a>
+      <a href="perceived-health.html">Perceived Health Status</a>
+      <a href="cross-analysis.html">Cross-Analysis</a>
+      <a href="conclusion.html" aria-current="page">Conclusion</a>
+    </nav>
+
+    <section id="intro" class="content">
+      <h1>Cross-Analysis: Spending vs. Health Perception</h1>
+
+      <p>
+        This section combines insights from the previous two datasets to
+        investigate whether increased health expenditure corresponds to better
+        perceived health among citizens — and whether that effect is equally
+        distributed across income groups.
+      </p>
+    </section>
+
+    <section id="comparative-analysis" class="analysis">
+      <h2>Spending vs Health Gap</h2>
+      <p>
+        Comparing the two charts—<strong
+          >hospital expenditure as a percentage of GDP</strong
+        >
+        and <strong>perceived health status by income group</strong>—reveals
+        notable trends and disparities.
+      </p>
+      <p>
+        For instance, <strong>Sweden</strong> spent just
+        <strong>1.34% of GDP on hospitals</strong> in 2016, significantly lower
+        than <strong>Norway’s 3.54%</strong>. Correspondingly, perceived health
+        among Sweden’s lowest income group (Q1) was <strong>63.6%</strong>,
+        compared to <strong>69%</strong> in Norway—suggesting that higher
+        hospital investment may correlate with better perceived health among
+        disadvantaged groups.
+      </p>
+      <p>
+        Interestingly, <strong>Denmark</strong> had the
+        <strong>highest hospital expenditure</strong> at
+        <strong>4.69% of GDP</strong>, yet its Q1 perceived health score was
+        only <strong>66.0%</strong>. This might reflect higher national health
+        awareness or investment in response to existing health burdens, rather
+        than purely resulting in better outcomes.
+      </p>
+      <p>
+        A stark contrast is visible in the <strong>United Kingdom</strong>,
+        where hospital expenditure was just <strong>1.16% of GDP</strong>, and
+        Q1 perceived health was relatively low at <strong>59.6%</strong>. On the
+        other hand, <strong>Australia</strong> spent <strong>3.65%</strong> of
+        GDP and saw a much higher Q1 perceived health score of
+        <strong>84.1%</strong>.
+      </p>
+      <p>
+        One notable outlier is <strong>Japan</strong>, which had the
+        <strong>second-highest hospital spending</strong> at
+        <strong>3.72% of GDP</strong>, yet reported the
+        <strong>lowest perceived health status</strong>: only
+        <strong>28%</strong> in Q1 and <strong>39.4%</strong> even in the
+        wealthiest quintile (Q5). This may be influenced by Japan’s aging
+        population, which likely impacts self-reported health perceptions.
+      </p>
+      <p>
+        Overall, while
+        <strong>higher spending on hospital services</strong> appears to support
+        better perceived health—especially for lower-income groups—exceptions
+        like Japan and Denmark suggest that
+        <strong>other demographic or cultural factors</strong> (e.g. aging,
+        awareness, expectations, or perhaps even climate) also shape how health
+        is perceived.
+      </p>
+      <p>
+        <strong>Data note:</strong> All Q1 perceived health values referenced
+        are from <strong>2016</strong>, except for <strong>Australia</strong>,
+        which uses <strong>2017</strong> data due to lack of availability in
+        2016.
+      </p>
+    </section>
+
+    <section class="chart">
+      <h2>2. Health Expenditure vs. Q1 Self-Reported Health</h2>
+      <figure>
+        <div id="scatter-q1"></div>
+        <figcaption>
+          <strong>Figure 2.</strong> Relationship between hospital expenditure
+          (% of GDP) and perceived health status among the poorest income
+          quintile (Q1), by country (2016–2022 average where available).
+        </figcaption>
+      </figure>
+      <div class="analysis">
+        <p>
+          This chart presents a more complex and uneven relationship. While some
+          high-spending countries (e.g. Norway, France) achieve reasonably good
+          Q1 health outcomes, others (e.g. Denmark) report much lower perceived
+          health among poorer citizens despite high investment.
+        </p>
+        <p>
+          The variability suggests that spending alone does not guarantee
+          equitable health outcomes for low-income groups. Social determinants,
+          accessibility, and targeted policy interventions likely play a
+          stronger role in shaping the wellbeing of Q1 populations. This
+          visualisation reinforces the importance of equity-oriented health
+          investment.
+        </p>
+      </div>
+    </section>
+
+    <section class="chart">
+      <h2>1. Health Expenditure vs. Q5 Self-Reported Health</h2>
+      <figure>
+        <div id="scatter-q5"></div>
+        <figcaption>
+          <strong>Figure 1.</strong> Relationship between hospital expenditure
+          (% of GDP) and perceived health status among the wealthiest income
+          quintile (Q5), by country (2016–2022 average where available).
+        </figcaption>
+      </figure>
+      <div class="analysis">
+        <p>
+          This scatterplot reveals a modest positive correlation between
+          national health expenditure and self-reported health among the
+          wealthiest (Q5). Countries like the United States and Canada show both
+          high spending and high perceived health, while lower-spending
+          countries like Poland and Hungary show slightly lower health ratings
+          among Q5 citizens.
+        </p>
+        <p>
+          However, the relationship is not perfectly linear. Some countries
+          achieve relatively high Q5 health ratings despite modest spending
+          (e.g. Australia), suggesting that other factors — such as healthcare
+          efficiency, lifestyle, or private sector access — may influence
+          outcomes in higher-income groups.
+        </p>
+      </div>
+    </section>
+
+    <section class="chart">
+      <h2>3. Health Expenditure vs. Health Perception Gap (Q5 − Q1)</h2>
+      <figure>
+        <div id="scatter-gap"></div>
+        <figcaption>
+          <strong>Figure 3.</strong> Gap in perceived health status between the
+          wealthiest (Q5) and poorest (Q1) citizens versus hospital expenditure
+          (% of GDP), by country.
+        </figcaption>
+      </figure>
+      <div class="analysis">
+        <p>
+          This scatterplot highlights disparities in health perception by income
+          group. A larger gap (Q5 − Q1) indicates greater inequality in
+          self-reported health. Interestingly, some of the highest-spending
+          countries (e.g. Denmark and the US) exhibit the largest perception
+          gaps, while others with moderate spending (e.g. France, Germany)
+          maintain more equitable outcomes.
+        </p>
+        <p>
+          This trend raises critical questions about how healthcare budgets are
+          allocated. High national expenditure does not necessarily reduce
+          disparities. In fact, without equity-focused strategies, increased
+          funding may disproportionately benefit wealthier populations.
+        </p>
+      </div>
+    </section>
+
+    <section class="summary">
+      <h2>Overall Insight</h2>
+      <p>
+        Together, these scatterplots demonstrate that spending alone is not a
+        sufficient predictor of either national health outcomes or equity. While
+        high investment can contribute to improved wellbeing — especially among
+        wealthier citizens — the benefits do not automatically extend to all
+        income groups. Policy design, access, and inclusivity remain crucial
+        factors in achieving fair and effective healthcare systems.
+      </p>
+    </section>
+
+    <footer class="site-footer">
+      Daniel Lyon - 174531x <br />COS30045 Assignment 3
+    </footer>
+  </body>
+</html>

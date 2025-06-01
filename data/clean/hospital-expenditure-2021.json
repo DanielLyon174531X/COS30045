@@ -1,0 +1,187 @@
+[
+  {
+    "Country": "Australia",
+    "Year": 2021,
+    "Value": 3.726
+  },
+  {
+    "Country": "Austria",
+    "Year": 2021,
+    "Value": 3.957
+  },
+  {
+    "Country": "Belgium",
+    "Year": 2021,
+    "Value": 3.509
+  },
+  {
+    "Country": "Bulgaria",
+    "Year": 2021,
+    "Value": 3.212
+  },
+  {
+    "Country": "Canada",
+    "Year": 2021,
+    "Value": 2.437
+  },
+  {
+    "Country": "Chile",
+    "Year": 2021,
+    "Value": 2.74
+  },
+  {
+    "Country": "Costa Rica",
+    "Year": 2021,
+    "Value": 3.761
+  },
+  {
+    "Country": "Croatia",
+    "Year": 2021,
+    "Value": 3.453
+  },
+  {
+    "Country": "Cyprus",
+    "Year": 2021,
+    "Value": 4.448
+  },
+  {
+    "Country": "Czechia",
+    "Year": 2021,
+    "Value": 3.414
+  },
+  {
+    "Country": "Denmark",
+    "Year": 2021,
+    "Value": 4.654
+  },
+  {
+    "Country": "Estonia",
+    "Year": 2021,
+    "Value": 2.237
+  },
+  {
+    "Country": "Finland",
+    "Year": 2021,
+    "Value": 3.377
+  },
+  {
+    "Country": "France",
+    "Year": 2021,
+    "Value": 3.695
+  },
+  {
+    "Country": "Germany",
+    "Year": 2021,
+    "Value": 3.114
+  },
+  {
+    "Country": "Greece",
+    "Year": 2021,
+    "Value": 4.028
+  },
+  {
+    "Country": "Hungary",
+    "Year": 2021,
+    "Value": 2.313
+  },
+  {
+    "Country": "Iceland",
+    "Year": 2021,
+    "Value": 3.231
+  },
+  {
+    "Country": "Israel",
+    "Year": 2021,
+    "Value": 0.275
+  },
+  {
+    "Country": "Japan",
+    "Year": 2021,
+    "Value": 3.91
+  },
+  {
+    "Country": "Korea",
+    "Year": 2021,
+    "Value": 2.964
+  },
+  {
+    "Country": "Latvia",
+    "Year": 2021,
+    "Value": 2.534
+  },
+  {
+    "Country": "Lithuania",
+    "Year": 2021,
+    "Value": 2.09
+  },
+  {
+    "Country": "Luxembourg",
+    "Year": 2021,
+    "Value": 1.438
+  },
+  {
+    "Country": "Malta",
+    "Year": 2021,
+    "Value": 3.108
+  },
+  {
+    "Country": "Mexico",
+    "Year": 2021,
+    "Value": 1.694
+  },
+  {
+    "Country": "Netherlands",
+    "Year": 2021,
+    "Value": 3.209
+  },
+  {
+    "Country": "Norway",
+    "Year": 2021,
+    "Value": 3.192
+  },
+  {
+    "Country": "Poland",
+    "Year": 2021,
+    "Value": 2.246
+  },
+  {
+    "Country": "Portugal",
+    "Year": 2021,
+    "Value": 4.246
+  },
+  {
+    "Country": "Romania",
+    "Year": 2021,
+    "Value": 2.699
+  },
+  {
+    "Country": "Slovak Republic",
+    "Year": 2021,
+    "Value": 2.432
+  },
+  {
+    "Country": "Slovenia",
+    "Year": 2021,
+    "Value": 3.104
+  },
+  {
+    "Country": "Spain",
+    "Year": 2021,
+    "Value": 4.213
+  },
+  {
+    "Country": "Sweden",
+    "Year": 2021,
+    "Value": 1.309
+  },
+  {
+    "Country": "Switzerland",
+    "Year": 2021,
+    "Value": 3.361
+  },
+  {
+    "Country": "United Kingdom",
+    "Year": 2021,
+    "Value": 1.412
+  }
+]

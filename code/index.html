@@ -6,324 +6,78 @@
     <meta name="author" content="Daniel Lyon - 174531X" />
     <!-- ========== Stylesheets ========== -->
     <link rel="stylesheet" href="style.css" />
-
-    <!-- ========== Libraries ========== -->
-    <script src="https://d3js.org/d3.v7.min.js"></script>
-
-    <!-- ========== Chart Scripts ========== -->
-    <script src="scripts/bar-chart.js"></script>
-    <script src="scripts/line-chart.js"></script>
-    <!-- <script src="scripts/scatterplot.js"></script> -->
   </head>
 
   <body>
     <header>
-      <h1>COS30045 - OECD Health Visualisation</h1>
-      <p>
-        Exploring hospital expenditure and perceived health status across
-        countries
-      </p>
+      <h1>COS30045 Assignment 3</h1>
+      <p>OECD data-driven exploration of public health trends</p>
     </header>
 
     <nav>
-      <a href="#bar">Hospital Expenditure</a>
-      <a href="#line">Perceived Health Over Time</a>
-      <a href="#comparative-analysis">Spending vs Health Gap</a>
-      <a href="#prototype-summary">Prototype Summary</a>
-      <a href="#data-sources">Data Sources</a>
+      <!-- Breadcrumb-style nav for quick switching between views -->
+      <a href="index.html">Home</a>
+      <a href="health-expenditure.html">Health Expenditure</a>
+      <a href="perceived-health.html">Perceived Health Status</a>
+      <a href="cross-analysis.html">Cross-Analysis</a>
+      <a href="conclusion.html" aria-current="page">Conclusion</a>
     </nav>
 
-    <section id="intro" class="content">
-      <h1>OECD Health Expenditure Data Exploration</h1>
+    <main class="content">
+      <h2>Welcome</h2>
       <p>
-        This website presents interactive data visualisations based on OECD
-        Health Statistics. The project aims to explore how different countries
-        allocate public resources to healthcare, particularly hospital
-        expenditure as a percentage of GDP. By examining these patterns
-        alongside other health indicators in future charts, we seek to highlight
-        the importance of sustained investment in public health systems for
-        better outcomes and equity.
-      </p>
-    </section>
-
-    <section id="bar" class="chart">
-      <h2>Hospital Expenditure (% GDP) by Country - 2016</h2>
-      <div id="bar-chart"></div>
-      <p class="figure-caption">
-        <strong>Figure 1.</strong> Hospital expenditure (% of GDP) by country,
-        2016
-      </p>
-      <p class="source">
-        Source:
-        <a
-          href="https://data-explorer.oecd.org/vis?lc=en&df[ds]=dsDisseminateFinalDMZ&df[id]=DSD_SHA%40DF_SHA&df[ag]=OECD.ELS.HD&dq=.A.EXP_HEALTH.PT_B1GQ...HC1.....&pd=2016%2C2016&to[TIME_PERIOD]=false&vw=tb"
-          target="_blank"
-        >
-          OECD Data Explorer – Hospital Expenditure (2016)
-        </a>
-      </p>
-      <section id="bar-analysis" class="analysis">
-        <h3>Analysis of Hospital Expenditure by Country (2016)</h3>
-        <p>
-          This bar chart visualizes the
-          <strong
-            >percentage of GDP that 34 countries allocated to hospital services
-            in 2016</strong
-          >. <strong>Denmark leads</strong> the group at
-          <strong>4.689%</strong>, followed closely by
-          <strong>Japan, Greece, and Australia</strong>—all exceeding
-          <strong>3.6%</strong>. At the other end of the scale, countries such
-          as the <strong>United Kingdom (1.162%)</strong>,
-          <strong>Luxembourg (1.327%)</strong>, and
-          <strong>Sweden (1.342%)</strong>
-          allocated relatively little to hospital expenditure.
-        </p>
-        <p>
-          From a public health policy perspective, this distribution raises
-          important questions about the
-          <strong>prioritisation of healthcare within national budgets</strong>.
-          While GDP percentages do not capture the full complexity of a nation’s
-          health system, they do reflect
-          <strong>government and system-level commitment</strong> to
-          <strong>hospital infrastructure and services</strong>—a critical
-          pillar of public health capacity.
-        </p>
-        <p>
-          Notably, several
-          <strong
-            >high-income countries with advanced healthcare systems</strong
-          >
-          (e.g. <strong>Germany, France, Canada</strong>) still fall below
-          <strong>3.5% of GDP in hospital spending</strong>. This suggests that
-          even among OECD nations,
-          <strong>investment in hospital services varies considerably</strong>
-          despite similar economic capacities.
-        </p>
-        <p>
-          For researchers and policymakers advocating for
-          <strong>increased public health funding</strong>, this visualisation
-          serves as a <strong>compelling starting point</strong>. It highlights
-          <strong>significant disparities</strong> and invites deeper
-          exploration of the relationship between
-          <strong>hospital spending and health outcomes</strong> (e.g. life
-          expectancy, avoidable mortality, or patient satisfaction). As
-          additional datasets are incorporated into this project—such as
-          <strong>perceived health status</strong>,
-          <strong>healthcare access equity</strong>, and
-          <strong>preventative care spending</strong>—we aim to show that
-          nations investing more consistently in health tend to achieve
-          <strong>better public health outcomes</strong>.
-        </p>
-      </section>
-    </section>
-
-    <section id="line" class="chart">
-      <h2>Perceived Health Status Over Time</h2>
-      <label for="country-select">Select Country:</label>
-      <select id="country-select"></select>
-      <div id="line-chart"></div>
-      <figcaption>
-        <strong>Figure 2.</strong> Changes in the percentage of population
-        reporting good perceived health over time, by country and income group.
-      </figcaption>
-      <p class="source">
-        Source:
-        <a
-          href="https://data-explorer.oecd.org/vis?lc=en&df[ds]=dsDisseminateFinalDMZ&df[id]=DSD_HEALTH_STAT%40DF_PHS_SES&df[ag]=OECD.ELS.HD&dq=JPN%2BGRC%2BDNK%2BFRA%2BSWE%2BDEU%2BNOR%2BGBR%2BUSA%2BNZL%2BCAN%2BAUS.A...Y_GE15._T.Q5%2BQ1....G..&pd=2016%2C&to[TIME_PERIOD]=false"
-          target="_blank"
-        >
-          OECD Data Explorer – Perceived Health Status (2016–2023)
-        </a>
-      </p>
-      <section id="line-analysis" class="analysis">
-        <h3>Analysis of Perceived Health Status Over Time</h3>
-        <p>
-          This line chart tracks the percentage of people in selected countries
-          who report being in
-          <em>“good” or “very good” health</em>, broken down by income quintile
-          (Q1 = lowest 20%, Q5 = highest 20%) over multiple years.
-        </p>
-        <p>
-          A clear trend is visible across almost all countries:
-          <strong
-            >perceived health status dropped noticeably during the COVID-19
-            pandemic years (2020–2022)</strong
-          >. This decline affected both lower- and higher-income groups, but
-          often more sharply among those in the lowest income quintile. The data
-          highlights how health crises can
-          <strong>widen socio-economic disparities in well-being</strong>, even
-          in high-income nations.
-        </p>
-        <p>
-          One particularly striking case is <strong>Japan</strong>, where
-          perceived health status is significantly lower than in other countries
-          — for both low- and high-income groups. Even among Japan’s wealthiest
-          20%, fewer than 45% report being in good or very good health in recent
-          years. In contrast, high-income groups in other countries typically
-          report rates between 70% and 95%. This may reflect
-          <strong>Japan’s much older population</strong>, as older individuals
-          may be more likely to report lower perceived health, even when
-          objective health indicators like life expectancy remain high.
-        </p>
-        <p>
-          These patterns suggest that
-          <strong
-            >income and age demographics both strongly influence how people
-            perceive their own health</strong
-          >
-          — and that public health investments should consider not just clinical
-          outcomes, but also how people feel about their health, especially
-          during periods of crisis.
-        </p>
-      </section>
-    </section>
-
-    <section id="comparative-analysis" class="analysis">
-      <h2>Spending vs Health Gap</h2>
-      <p>
-        Comparing the two charts—<strong
-          >hospital expenditure as a percentage of GDP</strong
-        >
-        and <strong>perceived health status by income group</strong>—reveals
-        notable trends and disparities.
-      </p>
-      <p>
-        For instance, <strong>Sweden</strong> spent just
-        <strong>1.34% of GDP on hospitals</strong> in 2016, significantly lower
-        than <strong>Norway’s 3.54%</strong>. Correspondingly, perceived health
-        among Sweden’s lowest income group (Q1) was <strong>63.6%</strong>,
-        compared to <strong>69%</strong> in Norway—suggesting that higher
-        hospital investment may correlate with better perceived health among
-        disadvantaged groups.
-      </p>
-      <p>
-        Interestingly, <strong>Denmark</strong> had the
-        <strong>highest hospital expenditure</strong> at
-        <strong>4.69% of GDP</strong>, yet its Q1 perceived health score was
-        only <strong>66.0%</strong>. This might reflect higher national health
-        awareness or investment in response to existing health burdens, rather
-        than purely resulting in better outcomes.
-      </p>
-      <p>
-        A stark contrast is visible in the <strong>United Kingdom</strong>,
-        where hospital expenditure was just <strong>1.16% of GDP</strong>, and
-        Q1 perceived health was relatively low at <strong>59.6%</strong>. On the
-        other hand, <strong>Australia</strong> spent <strong>3.65%</strong> of
-        GDP and saw a much higher Q1 perceived health score of
-        <strong>84.1%</strong>.
-      </p>
-      <p>
-        One notable outlier is <strong>Japan</strong>, which had the
-        <strong>second-highest hospital spending</strong> at
-        <strong>3.72% of GDP</strong>, yet reported the
-        <strong>lowest perceived health status</strong>: only
-        <strong>28%</strong> in Q1 and <strong>39.4%</strong> even in the
-        wealthiest quintile (Q5). This may be influenced by Japan’s aging
-        population, which likely impacts self-reported health perceptions.
-      </p>
-      <p>
-        Overall, while
-        <strong>higher spending on hospital services</strong> appears to support
-        better perceived health—especially for lower-income groups—exceptions
-        like Japan and Denmark suggest that
-        <strong>other demographic or cultural factors</strong> (e.g. aging,
-        awareness, expectations, or perhaps even climate) also shape how health
-        is perceived.
-      </p>
-      <p>
-        <strong>Data note:</strong> All Q1 perceived health values referenced
-        are from <strong>2016</strong>, except for <strong>Australia</strong>,
-        which uses <strong>2017</strong> data due to lack of availability in
-        2016.
-      </p>
-    </section>
-
-    <section id="prototype-summary" class="summary">
-      <h2>About This Prototype</h2>
-      <p>
-        This project represents a <strong>working prototype</strong> built to
-        practice the complete process of data-driven visualisation—from
-        <strong>data collection and cleaning</strong> to
-        <strong>JSON transformation</strong> and
-        <strong>D3.js implementation</strong>. Rather than aiming for a final
-        polished product at this stage, the current version serves as a testbed
-        to trial ideas, refine our workflows, and experiment with interactivity
-        and formatting.
+        This project presents an interactive visual analysis of international
+        public health trends using data visualisations built with D3.js. Drawing
+        on official datasets from the OECD Data Explorer, we explore the
+        relationship between national health spending and how citizens perceive
+        their own health.
       </p>
 
-      <p>Key features implemented in this prototype include:</p>
+      <p>
+        The aim of this site is to turn raw data into insight. Through a series
+        of visualisations, we highlight disparities between financial investment
+        in healthcare and reported wellbeing — revealing how economic priorities
+        may (or may not) align with public health outcomes.
+      </p>
+
+      <p>The site is organised into three core sections:</p>
+
       <ul>
         <li>
-          <strong>Animated bar chart</strong> for hospital expenditure (% of
-          GDP), with each bar growing on page load.
+          <strong>
+            <a href="health-expenditure.html">Health Expenditure:</a></strong
+          >
+          Country-level spending on hospital services as a percentage of GDP.
         </li>
         <li>
-          <strong>Tooltip on hover</strong> for both bar and line charts,
-          providing precise values.
+          <strong
+            ><a href="perceived-health.html"
+              >Perceived Health Status:</a
+            ></strong
+          >
+          Self-reported health by income quintile over time.
         </li>
         <li>
-          <strong>Country dropdown menu</strong> for the line chart, allowing
-          user-driven comparison across nations.
+          <strong><a href="cross-analysis.html">Cross-Analysis:</a></strong>
+          Bringing both datasets together to uncover patterns and raise critical
+          questions about health equity and investment effectiveness.
         </li>
         <li>
-          <strong>Clean code structure</strong> with functions split by
-          responsibility (e.g., axes rendering, line drawing, tooltips),
-          following <em>clean code principles</em>.
-        </li>
-        <li>
-          <strong>Consistent styling and layout</strong> across charts, using
-          reusable margins and scales.
-        </li>
-        <li>
-          <strong>Data preprocessing pipeline</strong> using Python to extract
-          and structure raw OECD data into clean JSON.
+          <strong><a href="conclusion.html">Project Conclusion:</a></strong>
+          Final reflections on the project’s goals, development process,
+          challenges, and key lessons learned while building the visualisation
+          prototype.
         </li>
       </ul>
 
       <p>
-        The final version of this project will include
-        <strong>additional visualisations</strong>,
-        <strong>more nuanced comparisons</strong> and an
-        <strong>integrated narrative</strong> that clearly argues the case for
-        increased health investment using both data and storytelling.
+        This is the final version of the website, created as part of a
+        university project for COS30045 - Data Visualisation at Swinburne
+        University. Our goal was not just technical implementation, but to
+        develop a coherent narrative through data — using interactivity, design,
+        and evidence to support informed discussion about public health policy.
       </p>
-
-      <p>
-        For now, this prototype demonstrates a working foundation—both
-        technically and analytically—for what will become a more complex and
-        polished interactive report.
-      </p>
-    </section>
-    <section id="data-sources" class="sources">
-      <h2>Data Sources</h2>
-      <p>
-        The data used in this prototype was obtained from the
-        <strong>OECD Data Explorer</strong>:
-      </p>
-      <ul>
-        <li>
-          <a
-            href="https://data-explorer.oecd.org/vis?lc=en&df[ds]=dsDisseminateFinalDMZ&df[id]=DSD_SHA%40DF_SHA&df[ag]=OECD.ELS.HD&dq=.A.EXP_HEALTH.PT_B1GQ...HC1.....&pd=2016%2C2016&to[TIME_PERIOD]=false&vw=tb"
-            target="_blank"
-          >
-            Hospital Expenditure (% of GDP) – 2016
-          </a>
-        </li>
-        <li>
-          <a
-            href="https://data-explorer.oecd.org/vis?lc=en&df[ds]=dsDisseminateFinalDMZ&df[id]=DSD_HEALTH_STAT%40DF_PHS_SES&df[ag]=OECD.ELS.HD&dq=JPN%2BGRC%2BDNK%2BFRA%2BSWE%2BDEU%2BNOR%2BGBR%2BUSA%2BNZL%2BCAN%2BAUS.A...Y_GE15._T.Q5%2BQ1....G..&pd=2016%2C&to[TIME_PERIOD]=false"
-            target="_blank"
-          >
-            Perceived Health Status by Income Quintile – 2016–2023
-          </a>
-        </li>
-      </ul>
-      <p>
-        Data was downloaded, cleaned using Python, and converted to JSON format
-        for use in D3.js visualisations.
-      </p>
-    </section>
-
+    </main>
     <footer class="site-footer">
       Daniel Lyon - 174531x <br />COS30045 Assignment 3
     </footer>

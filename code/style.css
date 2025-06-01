@@ -1,13 +1,71 @@
-/* author: Daniel Lyon 174531x */
-body {
-  font-family: "Segoe UI", sans-serif;
+/* ======================================
+   Author: Daniel Lyon - 174531x
+   COS30045 Assignment 3
+   ====================================== */
+
+/* === BASE RESET & BODY SETUP === */
+* {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+body {
+  font-family: "Segoe UI", sans-serif;
   background: #f0f2f5;
   color: #222;
   line-height: 1.6;
+  font-size: 16px;
 }
 
+/* === LAYOUT CONTAINERS === */
+main {
+  max-width: 900px;
+  margin: auto;
+  padding: 2rem;
+}
+
+.chart,
+.content,
+.summary,
+.analysis,
+.sources {
+  background: white;
+  padding: 2rem;
+  margin: 2rem auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  max-width: 960px;
+}
+
+/* === TYPOGRAPHY & HEADINGS === */
+h1,
+h2,
+h3 {
+  color: #007acc;
+  margin-top: 0;
+}
+
+.chart h2,
+.content h1 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+p {
+  margin-bottom: 1rem;
+}
+
+ul {
+  padding-left: 1.5rem;
+}
+
+ul li {
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+}
+
+/* === HEADER === */
 header {
   background-color: #007acc;
   color: white;
@@ -19,9 +77,11 @@ header {
 header h1 {
   margin: 0 0 0.5rem;
   font-size: 2rem;
-  color: white;
+  color: #fff;
+  text-align: center;
 }
 
+/* === NAVIGATION BAR === */
 nav {
   background: #222;
   padding: 1rem 2rem;
@@ -44,47 +104,46 @@ nav a:hover {
   color: #00bfff;
 }
 
-.chart,
-.content,
-.summary,
-.analysis,
-.sources {
-  background: white;
-  padding: 2rem;
-  margin: 2rem auto;
+/* === NAV BUTTONS (HOME PAGE) === */
+.nav-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
+  justify-content: center;
+}
+
+.nav-buttons a {
+  flex: 1 1 250px;
+  background-color: #003366;
+  color: white;
+  padding: 1.25rem;
   border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-  max-width: 960px;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
 }
 
-h1,
-h2,
-h3 {
-  color: #007acc;
-  margin-top: 0;
+.nav-buttons a small {
+  display: block;
+  font-weight: normal;
+  margin-top: 0.5rem;
+  opacity: 0.85;
 }
 
-.chart h2,
-.content h1 {
-  font-size: 1.8rem;
-  margin-bottom: 1rem;
+.nav-buttons a:hover {
+  background-color: #005599;
 }
 
+/* === SVG / CHARTS === */
 svg {
   width: 100%;
-  height: auto;
+  height: 500px;
   display: block;
   margin: auto;
 }
 
-.site-footer {
-  background: #f5f5f5;
-  text-align: center;
-  padding: 1rem 2rem;
-  font-size: 0.9rem;
-  color: #555;
-}
-
+/* === TOOLTIP === */
 .tooltip {
   font-size: 0.9rem;
   font-family: sans-serif;
@@ -99,7 +158,19 @@ svg {
   z-index: 1000;
 }
 
-/* === Summary and Analysis Sections === */
+/* === FIGURE / CAPTIONS === */
+figure {
+  margin: 2rem 0;
+}
+
+figcaption {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #555;
+  margin-top: 0.5rem;
+}
+
+/* === SUMMARY & ANALYSIS SECTIONS === */
 .summary,
 .analysis {
   background-color: #f9f9f9;
@@ -117,7 +188,7 @@ svg {
   font-size: 1.5rem;
 }
 
-/* === Source Citation === */
+/* === SOURCE CITATION === */
 .source,
 .sources {
   font-size: 0.9em;
@@ -137,11 +208,23 @@ svg {
   text-decoration: underline;
 }
 
-ul {
-  padding-left: 1.5rem;
+/* === FOOTER === */
+.site-footer {
+  background: #f5f5f5;
+  text-align: center;
+  padding: 1rem 2rem;
+  font-size: 0.9rem;
+  color: #555;
 }
 
-ul li {
-  margin-bottom: 0.5rem;
-  line-height: 1.5;
+/* === RESPONSIVE FIXES === */
+@media (max-width: 600px) {
+  nav {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nav-buttons a {
+    flex: 1 1 100%;
+  }
 }

@@ -1,0 +1,72 @@
+[
+  {
+    "Country": "Canada",
+    "Spending": 2.577,
+    "Q1": 79.9,
+    "Q5": 94.4,
+    "Gap": 14.5
+  },
+  {
+    "Country": "France",
+    "Spending": 3.49,
+    "Q1": 61.4,
+    "Q5": 72.1,
+    "Gap": 10.7
+  },
+  {
+    "Country": "Germany",
+    "Spending": 2.866,
+    "Q1": 51.5,
+    "Q5": 79.1,
+    "Gap": 27.6
+  },
+  {
+    "Country": "Greece",
+    "Spending": 3.687,
+    "Q1": 76.1,
+    "Q5": 82.0,
+    "Gap": 5.9
+  },
+  {
+    "Country": "Japan",
+    "Spending": 3.724,
+    "Q1": 28.0,
+    "Q5": 39.4,
+    "Gap": 11.4
+  },
+  {
+    "Country": "Denmark",
+    "Spending": 4.689,
+    "Q1": 66.0,
+    "Q5": 83.9,
+    "Gap": 17.9
+  },
+  {
+    "Country": "United Kingdom",
+    "Spending": 1.162,
+    "Q1": 59.6,
+    "Q5": 83.3,
+    "Gap": 23.7
+  },
+  {
+    "Country": "Sweden",
+    "Spending": 1.342,
+    "Q1": 63.6,
+    "Q5": 86.1,
+    "Gap": 22.5
+  },
+  {
+    "Country": "Australia",
+    "Spending": 3.648,
+    "Q1": 84.1,
+    "Q5": 93.0,
+    "Gap": 8.9
+  },
+  {
+    "Country": "Norway",
+    "Spending": 3.536,
+    "Q1": 69.0,
+    "Q5": 86.1,
+    "Gap": 17.1
+  }
+]

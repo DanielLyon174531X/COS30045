@@ -34,19 +34,24 @@
   }
 
   // === Populate Country Dropdown ===
-  function populateCountryDropdown(data, onChange) {
-    const countries = [...new Set(data.map((d) => d.Country))].sort();
-    const select = d3.select("#country-select").on("change", function () {
-      onChange(this.value);
-    });
+  function populateCountryDropdown(data, onSelect, defaultCountry) {
+    const countryList = [...new Set(data.map((d) => d.Country))];
+    const select = d3.select("#country-select");
 
     select
       .selectAll("option")
-      .data(countries)
+      .data(countryList)
       .enter()
       .append("option")
+      .text((d) => d)
       .attr("value", (d) => d)
-      .text((d) => d);
+      .property("selected", (d) => d === defaultCountry);
+
+    // Attach event listener
+    select.on("change", function () {
+      const selected = this.value;
+      onSelect(selected);
+    });
   }
 
   // === Draw Line Paths and Data Points ===
@@ -173,12 +178,29 @@
           .nice()
           .range([height, 0]);
 
-        renderChartAxes(svg, xScale, yScale);
-        populateCountryDropdown(data, (selectedCountry) => {
-          drawCountryLines(svg, data, selectedCountry, xScale, yScale, tooltip);
-        });
+        const countries = [...new Set(data.map((d) => d.Country))];
+        const defaultCountry = "Norway";
+        //Adjusted to allow for setting the default country manually.
+        // Initially, Australia was being displayed first because it came first alphabetically but,
+        // due to the fact that Australia's chart is the least visually appealing (only 2 data points available),
+        // it served as a terrible introduction, visually.
 
-        const defaultCountry = [...new Set(data.map((d) => d.Country))][0];
+        renderChartAxes(svg, xScale, yScale);
+        populateCountryDropdown(
+          data,
+          (selectedCountry) => {
+            drawCountryLines(
+              svg,
+              data,
+              selectedCountry,
+              xScale,
+              yScale,
+              tooltip
+            );
+          },
+          defaultCountry
+        );
+
         drawCountryLines(svg, data, defaultCountry, xScale, yScale, tooltip);
       }
     );
