@@ -1,6 +1,6 @@
 // ========== Entry Point ==========
 document.addEventListener("DOMContentLoaded", () => {
-  fetchDataAndRenderAverageChart("../../data/clean/hospital-expenditure.json");
+  fetchDataAndRenderAverageChart("../data/clean/hospital-expenditure.json");
 });
 
 // ========== Load & Parse ==========

@@ -3,7 +3,7 @@
 
 // ========== Entry Point ==========
 document.addEventListener("DOMContentLoaded", () => {
-  fetchDataAndInitDropdown("../../data/clean/hospital-expenditure.json");
+  fetchDataAndInitDropdown("../data/clean/hospital-expenditure.json");
 });
 
 // ========== Load & Prepare ==========
