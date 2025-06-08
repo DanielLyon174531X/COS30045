@@ -1,24 +1,36 @@
 // scripts/line-chart.js
-// Author: Daniel Lyon 174531x
+// Author: Daniel Lyon - 174531x
+// COS30045 Assignment 3
 
 (function () {
-  // === Constants for Chart Dimensions ===
-  const margin = { top: 20, right: 60, bottom: 20, left: 60 };
+  const margin = { top: 100, right: 100, bottom: 60, left: 100 };
   const width = 900 - margin.left - margin.right;
-  const height = 500 - margin.top - margin.bottom;
+  const height = 400 - margin.top - margin.bottom;
+  const ColourA = "#377eb8"; // Q1
+  const ColourB = "#e41a1c"; // Q5
 
-  // === SVG Container ===
   function createSVGContainer() {
     return d3
       .select("#line-chart")
       .append("svg")
-      .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + margin.bottom)
+      .attr(
+        "viewBox",
+        `0 0 ${width + margin.left + margin.right} ${
+          height + margin.top + margin.bottom
+        }`
+      )
+      .attr("preserveAspectRatio", "xMidYMid meet")
+      .style("width", "100%")
+      .style("height", "auto")
+      .attr("role", "img")
+      .attr(
+        "aria-label",
+        "Line chart showing percentage of people reporting good or very good health, by income group and country"
+      )
       .append("g")
       .attr("transform", `translate(${margin.left},${margin.top})`);
   }
 
-  // === Tooltip Configuration ===
   function createTooltipElement() {
     return d3
       .select("body")
@@ -33,7 +45,6 @@
       .style("opacity", 0);
   }
 
-  // === Populate Country Dropdown ===
   function populateCountryDropdown(data, onSelect, defaultCountry) {
     const countryList = [...new Set(data.map((d) => d.Country))];
     const select = d3.select("#country-select");
@@ -47,31 +58,88 @@
       .attr("value", (d) => d)
       .property("selected", (d) => d === defaultCountry);
 
-    // Attach event listener
     select.on("change", function () {
       const selected = this.value;
       onSelect(selected);
     });
   }
 
-  // === Draw Line Paths and Data Points ===
+  function renderAxes(svg, xScale, yScale) {
+    const xAxis = d3.axisBottom(xScale).tickFormat(d3.format("d")).ticks(8);
+    svg
+      .append("g")
+      .attr("class", "x-axis")
+      .attr("transform", `translate(0, ${height})`)
+      .call(xAxis);
+
+    const yAxis = d3.axisLeft(yScale);
+    svg.append("g").attr("class", "y-axis").call(yAxis);
+
+    svg
+      .append("text")
+      .attr("x", width / 2)
+      .attr("y", height + 40)
+      .attr("text-anchor", "middle")
+      .text("Year");
+
+    svg
+      .append("text")
+      .attr("x", -height / 2)
+      .attr("y", -45)
+      .attr("transform", "rotate(-90)")
+      .attr("text-anchor", "middle")
+      .text("% Reporting Good/Very Good Health");
+  }
+
+  function drawLegend(svg) {
+    const legendData = [
+      { label: "Lowest Income Quintile (Q1)", color: ColourA },
+      { label: "Highest Income Quintile (Q5)", color: ColourB },
+    ];
+
+    const legend = svg
+      .append("g")
+      .attr("class", "legend")
+      .attr("transform", `translate(${width - 250}, -40)`);
+
+    legendData.forEach((d, i) => {
+      const group = legend
+        .append("g")
+        .attr("transform", `translate(0, ${i * 20})`);
+      group
+        .append("rect")
+        .attr("x", 0)
+        .attr("width", 12)
+        .attr("height", 12)
+        .attr("fill", d.color);
+
+      group
+        .append("text")
+        .attr("x", 20)
+        .attr("y", 0)
+        .text(d.label)
+        .attr("font-size", "12px")
+        .attr("alignment-baseline", "middle");
+    });
+  }
+
   function drawCountryLines(svg, data, country, xScale, yScale, tooltip) {
     const countryData = data.filter((d) => d.Country === country);
-    const groupedLines = d3.groups(countryData, (d) => d.IncomeQuintile);
-
+    const grouped = d3.groups(countryData, (d) => d.IncomeQuintile);
     const color = d3
       .scaleOrdinal()
       .domain(["Q1", "Q5"])
-      .range(["#1f77b4", "#ff7f0e"]);
+      .range([ColourA, ColourB]);
 
     svg.selectAll(".line-path").remove();
     svg.selectAll(".dot").remove();
+    svg.selectAll(".legend").remove();
+    drawLegend(svg);
 
-    groupedLines.forEach(([quintile, values]) => {
+    grouped.forEach(([quintile, values]) => {
       values.sort((a, b) => a.Year - b.Year);
 
-      // Draw Line
-      svg
+      const line = svg
         .append("path")
         .datum(values)
         .attr("class", "line-path")
@@ -86,9 +154,19 @@
             .y((d) => yScale(d.Value))
         );
 
-      // Draw Data Points
+      const totalLength = line.node().getTotalLength();
+
+      line
+        .attr("stroke-dasharray", `${totalLength} ${totalLength}`)
+        .attr("stroke-dashoffset", totalLength)
+        .transition()
+        .duration(2000)
+        .ease(d3.easeCubicInOut)
+        .attr("stroke-dashoffset", 0);
+
+      // Animated dots
       svg
-        .selectAll(`.dot-${quintile}`)
+        .selectAll(null)
         .data(values)
         .enter()
         .append("circle")
@@ -97,6 +175,15 @@
         .attr("cy", (d) => yScale(d.Value))
         .attr("r", 4)
         .attr("fill", color(quintile))
+        .style("opacity", 0)
+        .transition()
+        .delay((_, i) => i * 150)
+        .duration(300)
+        .style("opacity", 1);
+
+      // Tooltips (attach to new selection)
+      svg
+        .selectAll("circle")
         .on("mouseover", (event, d) => {
           tooltip.transition().duration(200).style("opacity", 1);
           tooltip
@@ -114,48 +201,6 @@
     });
   }
 
-  // === Axis Render Functions ===
-  function renderXAxis(svg, xScale) {
-    const xAxis = d3.axisBottom(xScale).tickFormat(d3.format("d"));
-    svg
-      .append("g")
-      .attr("class", "x-axis")
-      .attr("transform", `translate(0, ${height})`)
-      .call(xAxis);
-  }
-
-  function renderYAxis(svg, yScale) {
-    const yAxis = d3.axisLeft(yScale);
-    svg.append("g").call(yAxis);
-  }
-
-  function labelXAxis(svg) {
-    svg
-      .append("text")
-      .attr("x", width / 2)
-      .attr("y", height + 40) // corrected to show inside bottom margin
-      .attr("text-anchor", "middle")
-      .text("Year");
-  }
-
-  function labelYAxis(svg) {
-    svg
-      .append("text")
-      .attr("x", -height / 2)
-      .attr("y", -45)
-      .attr("transform", "rotate(-90)")
-      .attr("text-anchor", "middle")
-      .text("% Reporting Good/Very Good Health");
-  }
-
-  function renderChartAxes(svg, xScale, yScale) {
-    renderXAxis(svg, xScale);
-    renderYAxis(svg, yScale);
-    labelXAxis(svg);
-    labelYAxis(svg);
-  }
-
-  // === Load JSON Data and Build Chart ===
   function loadChartDataAndRender() {
     const svg = createSVGContainer();
     const tooltip = createTooltipElement();
@@ -171,41 +216,25 @@
           .scaleLinear()
           .domain(d3.extent(data, (d) => d.Year))
           .range([0, width]);
-
         const yScale = d3
           .scaleLinear()
-          .domain([0, 100]) // fixed maximum to 100 for visibility
+          .domain([0, 100])
           .nice()
           .range([height, 0]);
-
-        const countries = [...new Set(data.map((d) => d.Country))];
         const defaultCountry = "Norway";
-        //Adjusted to allow for setting the default country manually.
-        // Initially, Australia was being displayed first because it came first alphabetically but,
-        // due to the fact that Australia's chart is the least visually appealing (only 2 data points available),
-        // it served as a terrible introduction, visually.
 
-        renderChartAxes(svg, xScale, yScale);
+        renderAxes(svg, xScale, yScale);
         populateCountryDropdown(
           data,
-          (selectedCountry) => {
-            drawCountryLines(
-              svg,
-              data,
-              selectedCountry,
-              xScale,
-              yScale,
-              tooltip
-            );
+          (selected) => {
+            drawCountryLines(svg, data, selected, xScale, yScale, tooltip);
           },
           defaultCountry
         );
-
         drawCountryLines(svg, data, defaultCountry, xScale, yScale, tooltip);
       }
     );
   }
 
-  // === Initialize Chart After DOM Ready ===
   document.addEventListener("DOMContentLoaded", loadChartDataAndRender);
 })();

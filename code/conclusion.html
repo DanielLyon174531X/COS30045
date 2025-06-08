@@ -81,33 +81,57 @@
         <ul>
           <li>
             <strong>Animated bar chart</strong> for hospital expenditure (% of
-            GDP), with each bar growing on page load.
+            GDP), with smooth transitions on year change and a timeline scrubber
+            with play/pause control.
           </li>
           <li>
-            <strong>Tooltip on hover</strong> for both bar and line charts,
-            providing precise values.
+            <strong>Interactive line chart</strong> with country selector and
+            brushing functionality, allowing users to zoom into custom year
+            ranges and inspect trends.
           </li>
           <li>
-            <strong>Country dropdown menu</strong> for the line chart, allowing
-            user-driven comparison across nations.
+            <strong>Average trend line chart</strong> displaying hospital
+            spending across OECD countries, with COVID-19 years visually
+            highlighted for context.
           </li>
           <li>
-            <strong>Clean code structure</strong> with functions split by
-            responsibility (e.g., axes rendering, line drawing, tooltips),
-            following <em>clean code principles</em>.
+            <strong>Scatterplots with responsive tooltips</strong> comparing
+            hospital spending to perceived health for both Q1 and Q5 income
+            groups, plus a third plot showing inequality gap (Q5 − Q1).
           </li>
           <li>
-            <strong>Consistent styling and layout</strong> across charts, using
-            reusable margins and scales.
+            <strong>Tooltip on hover</strong> for all charts (bars, lines, and
+            scatter), showing exact values and country names to improve
+            interpretability.
           </li>
           <li>
-            <strong>Data preprocessing pipeline</strong> using Python to extract
-            and structure raw OECD data into clean JSON.
+            <strong>Responsive layout and scaling</strong> across all
+            visualisations, including mobile support via viewBox-based SVG
+            sizing.
+          </li>
+          <li>
+            <strong>Accessibility improvements</strong>, including
+            <code>role="img"</code> and <code>aria-label</code> on SVG elements
+            for screen reader compatibility.
+          </li>
+          <li>
+            <strong>Clean code structure</strong> with modular D3.js files per
+            chart, grouped helper functions, and consistent naming conventions
+            following clean code principles.
+          </li>
+          <li>
+            <strong>Data cleaning pipeline</strong> using Python to extract,
+            filter, and convert OECD CSV datasets into usable JSON files for
+            D3.js.
+          </li>
+          <li>
+            <strong>Multi-page site structure</strong> with header navigation
+            and contextual text content for each section, including analysis and
+            commentary.
           </li>
         </ul>
       </section>
-
-      <section id="data-sources" class="sources">
+      <section id="data-sources" class="content">
         <h2>Data Sources</h2>
         <p>
           The data used in this prototype was obtained from the
@@ -116,7 +140,7 @@
         <ul>
           <li>
             <a
-              href="https://data-explorer.oecd.org/vis?lc=en&df[ds]=dsDisseminateFinalDMZ&df[id]=DSD_SHA%40DF_SHA&df[ag]=OECD.ELS.HD&dq=.A.EXP_HEALTH.PT_B1GQ...HC1.....&pd=2016%2C&to[TIME_PERIOD]=false&vw=tb/"
+              href="https://data-explorer.oecd.org/vis?lc=en&amp;df[ds]=dsDisseminateFinalDMZ&amp;df[id]=DSD_SHA%40DF_SHA&amp;df[ag]=OECD.ELS.HD&amp;dq=.A.EXP_HEALTH.PT_B1GQ...HC1.....&amp;pd=2016%2C&amp;to[TIME_PERIOD]=false&amp;vw=tb/"
               target="_blank"
             >
               Hospital Expenditure (% of GDP)
@@ -124,7 +148,7 @@
           </li>
           <li>
             <a
-              href="https://data-explorer.oecd.org/vis?lc=en&df[ds]=dsDisseminateFinalDMZ&df[id]=DSD_HEALTH_STAT%40DF_PHS_SES&df[ag]=OECD.ELS.HD&dq=JPN%2BGRC%2BDNK%2BFRA%2BSWE%2BDEU%2BNOR%2BGBR%2BUSA%2BNZL%2BCAN%2BAUS.A...Y_GE15._T.Q5%2BQ1....G..&pd=2016%2C&to[TIME_PERIOD]=false"
+              href="https://data-explorer.oecd.org/vis?lc=en&amp;df[ds]=dsDisseminateFinalDMZ&amp;df[id]=DSD_HEALTH_STAT%40DF_PHS_SES&amp;df[ag]=OECD.ELS.HD&amp;dq=JPN%2BGRC%2BDNK%2BFRA%2BSWE%2BDEU%2BNOR%2BGBR%2BUSA%2BNZL%2BCAN%2BAUS.A...Y_GE15._T.Q5%2BQ1....G..&amp;pd=2016%2C&amp;to[TIME_PERIOD]=false"
               target="_blank"
             >
               Perceived Health Status by Income Quintile – 2016–2023

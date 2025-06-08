@@ -4,20 +4,12 @@
     <meta charset="UTF-8" />
     <title>Health Expenditure - COS30045</title>
     <meta name="author" content="Daniel Lyon - 174531X" />
-    <!-- ========== Stylesheets ========== -->
     <link rel="stylesheet" href="style.css" />
-
-    <!-- ========== Libraries ========== -->
     <script src="https://d3js.org/d3.v7.min.js"></script>
-
-    <!-- ========== Chart Scripts ========== -->
-    <script src="scripts/spending-2016-chart.js"></script>
-    <script src="scripts/spending-2021-chart.js"></script>
-    <!-- TODO: Merge into a single .js allowing the user to select year... -->
+    <script src="scripts/bar-chart.js"></script>
     <script src="scripts/spending-trends-chart.js"></script>
     <script src="scripts/spending-trends-average-chart.js"></script>
   </head>
-
   <body>
     <header>
       <h1>Hospital Expenditure (% GDP)</h1>
@@ -25,257 +17,225 @@
     </header>
 
     <nav>
-      <!-- Breadcrumb-style nav for quick switching between views -->
       <a href="index.html">Home</a>
-      <a href="health-expenditure.html">Health Expenditure</a>
+      <a href="health-expenditure.html" aria-current="page"
+        >Health Expenditure</a
+      >
       <a href="perceived-health.html">Perceived Health Status</a>
       <a href="cross-analysis.html">Cross-Analysis</a>
-      <a href="conclusion.html" aria-current="page">Conclusion</a>
+      <a href="conclusion.html">Conclusion</a>
     </nav>
 
     <section id="intro" class="content">
-      <h1>Health Expenditure (% of GDP)</h1>
-
+      <h2>Overview</h2>
       <p>
-        This section explores how much each country invests in hospital care as
-        a percentage of their Gross Domestic Product (GDP), based on OECD data
-        from 2016.
+        Hospital expenditure, expressed as a percentage of gross domestic
+        product (GDP), serves as a key benchmark for how much priority a country
+        places on healthcare infrastructure and delivery. This metric reflects
+        not only financial commitment but also strategic preparedness in
+        managing public health challenges—from everyday healthcare needs to
+        global crises like COVID-19. While higher spending does not always
+        equate to better outcomes, it often signals greater investment in
+        staffing, technology, facilities, and system resilience.
+      </p>
+      <p>
+        This page explores hospital expenditure patterns across OECD countries
+        between 2016 and 2023. Three main visualizations guide the analysis: a
+        year-by-year bar chart comparison between countries, a line chart
+        showing individual country trends over time, and an aggregated trend
+        line of average OECD expenditure. Together, these charts help uncover
+        how countries differ in their funding strategies and how major events
+        have shifted those patterns. From baseline year snapshots to
+        post-pandemic adjustments, the visual narrative provides a deeper
+        understanding of health investment across nations.
       </p>
     </section>
-
-    <section id="bar" class="chart">
-      <h2>Hospital Expenditure (% GDP) by Country - 2016</h2>
-      <div id="bar-chart-2016"></div>
-      <p class="figure-caption">
-        <strong>Figure 1.</strong> Hospital expenditure (% of GDP) by country,
-        2016
-      </p>
-      <p class="source">
-        Source:
-        <a
-          href="https://data-explorer.oecd.org/vis?lc=en&df[ds]=dsDisseminateFinalDMZ&df[id]=DSD_SHA%40DF_SHA&df[ag]=OECD.ELS.HD&dq=.A.EXP_HEALTH.PT_B1GQ...HC1.....&pd=2016%2C2016&to[TIME_PERIOD]=false&vw=tb"
-          target="_blank"
-        >
-          OECD Data Explorer – Hospital Expenditure (2016)
-        </a>
-      </p>
-      <section id="bar-analysis" class="analysis">
-        <h3>Analysis of Hospital Expenditure by Country (2016)</h3>
-        <p>
-          This bar chart visualizes the
-          <strong
-            >percentage of GDP that 34 countries allocated to hospital services
-            in 2016</strong
-          >. <strong>Denmark leads</strong> the group at
-          <strong>4.689%</strong>, followed closely by
-          <strong>Japan, Greece, and Australia</strong>—all exceeding
-          <strong>3.6%</strong>. At the other end of the scale, countries such
-          as the <strong>United Kingdom (1.162%)</strong>,
-          <strong>Luxembourg (1.327%)</strong>, and
-          <strong>Sweden (1.342%)</strong>
-          allocated relatively little to hospital expenditure.
-        </p>
-        <p>
-          From a public health policy perspective, this distribution raises
-          important questions about the
-          <strong>prioritisation of healthcare within national budgets</strong>.
-          While GDP percentages do not capture the full complexity of a nation’s
-          health system, they do reflect
-          <strong>government and system-level commitment</strong> to
-          <strong>hospital infrastructure and services</strong>—a critical
-          pillar of public health capacity.
-        </p>
-        <p>
-          Notably, several
-          <strong
-            >high-income countries with advanced healthcare systems</strong
-          >
-          (e.g. <strong>Germany, France, Canada</strong>) still fall below
-          <strong>3.5% of GDP in hospital spending</strong>. This suggests that
-          even among OECD nations,
-          <strong>investment in hospital services varies considerably</strong>
-          despite similar economic capacities.
-        </p>
-        <p>
-          For researchers and policymakers advocating for
-          <strong>increased public health funding</strong>, this visualisation
-          serves as a <strong>compelling starting point</strong>. It highlights
-          <strong>significant disparities</strong> and invites deeper
-          exploration of the relationship between
-          <strong>hospital spending and health outcomes</strong> (e.g. life
-          expectancy, avoidable mortality, or patient satisfaction). As
-          additional datasets are incorporated into this project—such as
-          <strong>perceived health status</strong>,
-          <strong>healthcare access equity</strong>, and
-          <strong>preventative care spending</strong>—we aim to show that
-          nations investing more consistently in health tend to achieve
-          <strong>better public health outcomes</strong>.
+    <div class="scroll-container">
+      <section id="bar" class="chart">
+        <h2>Hospital Expenditure (% GDP) by Country - 2016</h2>
+        <div id="bar-chart" class="chart" data-year="2016"></div>
+        <div class="timeline-container">
+          <div class="timeline-row">
+            <label for="yearRange"><strong>Year:</strong></label>
+            <input
+              type="range"
+              id="yearRange"
+              min="2016"
+              max="2022"
+              step="1"
+              value="2016"
+            />
+            <button id="playButton">▶ Play</button>
+          </div>
+          <div id="sliderTooltip" class="slider-tooltip" style="display: none">
+            2016
+          </div>
+        </div>
+        <p class="figure-caption">
+          <strong>Figure 1.</strong> Hospital expenditure (% of GDP) by country,
+          2016–2022
         </p>
       </section>
-    </section>
+    </div>
 
-    <section id="bar" class="chart">
-      <h2>Hospital Expenditure (% GDP) by Country - 2021</h2>
-      <div id="bar-chart-2021"></div>
-      <p class="figure-caption">
-        <strong>Figure 2.</strong> Hospital expenditure (% of GDP) by country,
-        2021
+    <section id="bar-analysis" class="analysis">
+      <h3>Analysis: Country Comparison</h3>
+      <p>
+        The bar chart comparing hospital expenditure by country (as a percentage
+        of GDP) highlights striking disparities across OECD nations. Denmark,
+        Japan, and Germany stand out with some of the highest allocations,
+        exceeding 3.5% of GDP in 2016, and in some cases nearing 4.7%. These
+        figures reflect strong government commitment to hospital-based
+        healthcare services and infrastructure. Countries at the lower end of
+        the scale—such as the UK, Sweden, and Luxembourg—allocate far less,
+        often below 1.5%. These differences may stem from variations in
+        healthcare models, public-private splits in funding, or broader national
+        budget constraints.
       </p>
-      <p class="source">
-        Source:
-        <a
-          href="https://data-explorer.oecd.org/vis?lc=en&df[ds]=dsDisseminateFinalDMZ&df[id]=DSD_SHA%40DF_SHA&df[ag]=OECD.ELS.HD&dq=.A.EXP_HEALTH.PT_B1GQ...HC1.....&pd=2016%2C&to[TIME_PERIOD]=false&vw=tb"
-          target="_blank"
-        >
-          OECD Data Explorer – Hospital Expenditure
-        </a>
+      <p>
+        The contrast becomes even more pronounced when tracking changes over
+        time. By 2021, most countries had increased their hospital expenditure
+        in response to COVID-19, yet the degree of change varied significantly.
+        Nations such as Portugal, Cyprus, and Spain experienced dramatic
+        increases of 0.7% to over 2% of GDP within five years. Meanwhile, other
+        countries showed more modest gains or even slight declines, as was the
+        case in Canada. This uneven growth points to differing fiscal
+        capacities, policy responses, and priorities in managing the crisis.
       </p>
-      <section id="bar-analysis" class="analysis">
-        <h3>Analysis of Hospital Expenditure by Country (2021)</h3>
-        <p>
-          This chart shows the
-          <strong>hospital expenditure as a percentage of GDP</strong> across
-          countries in 2021. Compared to 2016, most nations experienced an
-          increase in hospital spending—likely influenced by the
-          <strong>global COVID-19 pandemic</strong>, which placed unprecedented
-          pressure on healthcare systems. Notably, countries such as
-          <strong>Portugal (from 3.545% to 4.246%)</strong>,
-          <strong>Cyprus (2.338% to 4.448%)</strong>, and
-          <strong>Spain (3.432% to 4.213%)</strong> saw significant increases,
-          indicating a ramp-up in public health investments.
-        </p>
-        <p>
-          Some high-income nations also increased spending:
-          <strong>France</strong> (3.49% → 3.695%),
-          <strong>Germany</strong> (2.866% → 3.114%), and
-          <strong>Australia</strong> (3.648% → 3.726%). However, the rate of
-          increase varied. For instance, <strong>Canada</strong> slightly
-          <em>decreased</em> its hospital spending (2.577% → 2.437%), possibly
-          due to shifts in how care was delivered (e.g. more outpatient or
-          community-based services).
-        </p>
-        <p>
-          Despite economic growth, some countries like
-          <strong>Sweden</strong> (1.342% → 1.309%) and the
-          <strong>UK</strong> (1.162% → 1.412%) remained relatively low in terms
-          of hospital-related spending as a share of GDP. These patterns may
-          reflect ongoing
-          <strong>efficiency strategies, different health system models</strong
-          >, or evolving <strong>policy priorities</strong>.
-        </p>
-        <p>
-          The comparison suggests that external shocks like pandemics can
-          significantly reshape national health spending. It also highlights how
-          different countries
-          <strong>adapt their investment strategies</strong> in hospital care,
-          which may have long-term implications for
-          <strong
-            >health system resilience, preparedness, and population
-            outcomes</strong
-          >.
-        </p>
-      </section>
+      <p>
+        It's important to remember that hospital spending as a percentage of GDP
+        does not always correlate directly with health outcomes—but it does
+        signal the extent to which hospital services are valued and supported by
+        governments. The variation raises critical questions about efficiency,
+        sustainability, and equity in healthcare funding. For researchers and
+        policymakers, these figures offer an important lens through which to
+        evaluate system performance, especially when considered alongside
+        indicators such as patient satisfaction, hospital wait times, and
+        avoidable mortality.
+      </p>
     </section>
 
     <section id="trend" class="chart">
-      <h2>Hospital Expenditure Trends by Country (2016–2023)</h2>
+      <h2>Spending Over Time - Country Trends</h2>
       <label for="country-select">Select Country:</label>
       <select id="country-select"></select>
       <div id="spending-trends-chart"></div>
-
       <p class="figure-caption">
-        <strong>Figure 3.</strong> Line chart of hospital expenditure as % of
-        GDP by country, 2016–2023
+        <strong>Figure 2.</strong> Country-specific hospital spending trends,
+        2016–2023
       </p>
-      <p class="source">
-        Source:
-        <a
-          href="https://data-explorer.oecd.org/vis?lc=en&df[ds]=dsDisseminateFinalDMZ&df[id]=DSD_SHA%40DF_SHA&df[ag]=OECD.ELS.HD&dq=.A.EXP_HEALTH.PT_B1GQ...HC1.....&pd=2016%2C&to[TIME_PERIOD]=false&vw=tb"
-          target="_blank"
-        >
-          OECD Health Statistics – Hospital Expenditure (2016–2023)
-        </a>
+    </section>
+
+    <section id="trend-analysis" class="analysis">
+      <h3>Analysis: Time Trends</h3>
+      <p>
+        The line chart showing hospital expenditure trends from 2016 to 2023
+        offers valuable insight into how healthcare funding evolved in response
+        to global events. Most countries show a visible spike in 2020 and 2021,
+        corresponding to the height of the COVID-19 pandemic. This surge
+        reflects emergency health measures, hospital capacity expansions, and
+        broader system stress. Countries like France, Portugal, and Cyprus
+        responded with sustained increases that remained high even after 2021,
+        suggesting a strategic pivot toward long-term healthcare investment.
       </p>
-      <section class="analysis">
-        <h3>Analysis of Hospital Expenditure Trends by Country (2016–2023)</h3>
-        <p>
-          This interactive line chart illustrates trends in hospital expenditure
-          as a percentage of GDP across OECD countries from
-          <strong>2016 to 2023</strong>. While most countries show a
-          <strong>notable increase in 2020 and 2021</strong>, likely reflecting
-          the <strong>impact of the COVID-19 pandemic</strong>, the trends vary
-          significantly across nations.
-        </p>
-        <p>
-          For example, <strong>Denmark</strong>, <strong>Cyprus</strong>, and
-          <strong>Portugal</strong> consistently allocate more than
-          <strong>4% of GDP</strong> to hospital services in recent years,
-          indicating sustained investment in hospital infrastructure. In
-          contrast, countries such as <strong>Israel</strong>,
-          <strong>Luxembourg</strong>, and the
-          <strong>United Kingdom</strong> maintain relatively low hospital
-          expenditure, generally under <strong>1.6% of GDP</strong>.
-        </p>
-        <p>
-          It is important to note that
-          <strong>not all countries have reported data through to 2023</strong>.
-          While most countries provided data up to <strong>2022</strong>, only a
-          limited number have published figures for <strong>2023</strong> at the
-          time of writing. As such, comparisons beyond 2021 should be made with
-          caution.
-        </p>
-        <p>
-          These spending patterns highlight how healthcare priorities differ
-          internationally and prompt further questions about the
-          <strong
-            >relationship between expenditure levels and public health
-            outcomes</strong
-          >, particularly in times of crisis. The chart enables users to explore
-          individual country trajectories over time, offering insights into both
-          <strong>long-term strategies</strong> and
-          <strong>short-term responses</strong> in national healthcare
-          investment.
-        </p>
-      </section>
+      <p>
+        Conversely, other nations, including Australia and the UK, appear to
+        revert to pre-pandemic spending levels after the initial crisis years.
+        This may indicate either a return to previous budgeting norms or
+        confidence in non-hospital-based care models. Countries like Germany,
+        while already allocating a large portion of GDP to hospitals, made
+        incremental increases rather than radical shifts, hinting at a more
+        gradual scaling of health infrastructure rather than temporary surges.
+      </p>
+      <p>
+        These differing trajectories illustrate how health expenditure is not
+        merely reactive, but reflects deeper priorities and structural
+        capacities. The brushing feature in the chart enables users to closely
+        inspect specific time windows—such as 2019–2021—to better understand the
+        duration and magnitude of each country’s fiscal response. Importantly,
+        not all countries have reported data through 2023, so caution should be
+        applied when interpreting the latter years. Nonetheless, the trendlines
+        strongly suggest that public health crises act as inflection points,
+        shaping not just short-term spending but potentially altering long-term
+        health system strategies.
+      </p>
     </section>
 
     <section id="trend-average" class="chart">
-      <h2>Average Hospital Expenditure Trends Across Countries (2016–2023)</h2>
+      <h2>Average Hospital Expenditure Trend (All Countries)</h2>
       <div id="spending-trends-average-chart"></div>
       <p class="figure-caption">
-        <strong>Figure 4.</strong> Average hospital expenditure (% of GDP)
-        across countries by year
+        <strong>Figure 3.</strong> Average hospital expenditure trend across
+        OECD countries
       </p>
-      <p class="source">
-        Source:
-        <a
-          href="https://data-explorer.oecd.org/vis?lc=en&df[ds]=dsDisseminateFinalDMZ&df[id]=DSD_SHA%40DF_SHA&df[ag]=OECD.ELS.HD&dq=.A.EXP_HEALTH.PT_B1GQ...HC1.....&pd=2016%2C&to[TIME_PERIOD]=false&vw=tb/"
-          target="_blank"
-        >
-          OECD Health Statistics – Hospital Expenditure
-        </a>
+    </section>
+
+    <section id="average-analysis" class="analysis">
+      <h3>Analysis: OECD Average Trend</h3>
+      <p>
+        The average trend across all reporting OECD countries reinforces the
+        narrative of a pandemic-induced surge in hospital expenditure. Between
+        2019 and 2021, the average rose sharply, reflecting coordinated
+        increases in public health funding. This sharp uptick coincides with
+        unprecedented global health demands: ICU expansions, vaccine
+        infrastructure, emergency staffing, and equipment procurement. While
+        some of this spending was temporary, the average remained elevated into
+        2022 and early 2023, hinting at long-lasting impacts.
       </p>
-      <section class="analysis">
-        <p>
-          This chart displays the average annual hospital expenditure as a
-          percentage of GDP across all reporting OECD countries from 2016 to
-          2023. It highlights a distinct increase in spending during 2020 and
-          2021, which coincides with the global COVID-19 pandemic. The average
-          rose sharply in 2020 as many countries boosted health budgets in
-          response to public health emergencies, then remained elevated through
-          2021. In 2022 and 2023, the average begins to level out or slightly
-          decline, though this should be interpreted with caution—data
-          availability drops significantly in the final two years, with most
-          countries reporting only up to 2022 and relatively few providing
-          figures for 2023. Despite this limitation, the trend provides useful
-          context for understanding how health expenditure evolved globally
-          during and after the pandemic years.
-        </p>
-      </section>
+      <p>
+        Interestingly, the data shows that while the average plateaued after
+        2021, it did not drop back to 2018 levels. This may signal a
+        recalibration of what is considered “normal” investment in hospital
+        services post-pandemic. Even nations not traditionally known for high
+        hospital expenditure—like Ireland or Korea—showed higher baseline levels
+        after the crisis years. The persistence of elevated averages suggests
+        that countries may be investing more to build resilience, expand
+        capacity, or correct past underfunding.
+      </p>
+      <p>
+        However, data availability becomes thinner for 2023, as many countries
+        have not yet reported. For those that have, the general trend appears
+        stable, if slightly reduced. For policymakers, this aggregated view
+        serves as a benchmark against which to compare national strategies. Are
+        countries retreating to old norms, or maintaining their investment in a
+        more resilient health infrastructure? The answers will shape future
+        outcomes in the face of the next global health event.
+      </p>
+    </section>
+
+    <section id="conclusion" class="content">
+      <h2>Conclusion</h2>
+      <p>
+        The visual and analytical insights presented on this page highlight not
+        only how hospital expenditure varies across OECD countries, but also how
+        those variations have shifted in response to global events. The COVID-19
+        pandemic created a clear and measurable impact, with most countries
+        increasing their hospital budgets between 2019 and 2021. However, the
+        degree of change—and whether it persisted—differed significantly from
+        one nation to another.
+      </p>
+      <p>
+        Countries like Denmark, Portugal, and Japan demonstrate consistently
+        high investment in hospital infrastructure, while others such as the UK
+        and Sweden remain at the lower end of the spectrum. Some nations
+        maintained elevated spending after the pandemic peak, potentially
+        indicating a long-term commitment to healthcare resilience. Others
+        reverted to previous funding levels, raising questions about the
+        sustainability of crisis-driven investment.
+      </p>
+      <p>
+        Going forward, these patterns should be examined in relation to health
+        outcomes—are countries that spend more achieving better care quality,
+        faster service delivery, or improved public satisfaction? The data on
+        this page lays the foundation for such exploration. It reinforces the
+        importance of proactive, not just reactive, investment in healthcare and
+        invites policymakers to consider the long-term value of strong hospital
+        systems in safeguarding public health.
+      </p>
     </section>
 
     <footer class="site-footer">
-      Daniel Lyon - 174531x <br />COS30045 Assignment 3
+      Daniel Lyon - 174531X <br />COS30045 Assignment 3
     </footer>
   </body>
 </html>

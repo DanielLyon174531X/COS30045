@@ -4,14 +4,9 @@
     <meta charset="UTF-8" />
     <title>Cross-Analysis - COS30045</title>
     <meta name="author" content="Daniel Lyon - 174531X" />
-    <!-- ========== Stylesheets ========== -->
     <link rel="stylesheet" href="style.css" />
-
-    <!-- ========== Libraries ========== -->
     <script src="https://d3js.org/d3.v7.min.js"></script>
-
-    <!-- ========== Chart Scripts ========== -->
-    <script src="scripts/cross-analysis.js"></script>
+    <script src="scripts/cross-analysis.js" defer></script>
   </head>
 
   <body>
@@ -21,93 +16,77 @@
     </header>
 
     <nav>
-      <!-- Breadcrumb-style nav for quick switching between views -->
       <a href="index.html">Home</a>
       <a href="health-expenditure.html">Health Expenditure</a>
       <a href="perceived-health.html">Perceived Health Status</a>
-      <a href="cross-analysis.html">Cross-Analysis</a>
-      <a href="conclusion.html" aria-current="page">Conclusion</a>
+      <a href="cross-analysis.html" aria-current="page">Cross-Analysis</a>
+      <a href="conclusion.html">Conclusion</a>
     </nav>
 
-    <section id="intro" class="content">
+    <section class="content">
       <h1>Cross-Analysis: Spending vs. Health Perception</h1>
-
       <p>
-        This section combines insights from the previous two datasets to
-        investigate whether increased health expenditure corresponds to better
-        perceived health among citizens — and whether that effect is equally
-        distributed across income groups.
+        This section combines insights from previous datasets to investigate
+        whether increased hospital expenditure aligns with better health
+        outcomes – particularly for lower-income groups.
       </p>
     </section>
 
-    <section id="comparative-analysis" class="analysis">
+    <section class="analysis">
       <h2>Spending vs Health Gap</h2>
       <p>
-        Comparing the two charts—<strong
-          >hospital expenditure as a percentage of GDP</strong
-        >
-        and <strong>perceived health status by income group</strong>—reveals
-        notable trends and disparities.
+        Comparing the previous sections — hospital expenditure as a percentage
+        of GDP and perceived health status by income group—reveals notable
+        trends and disparities.
       </p>
       <p>
-        For instance, <strong>Sweden</strong> spent just
-        <strong>1.34% of GDP on hospitals</strong> in 2016, significantly lower
-        than <strong>Norway’s 3.54%</strong>. Correspondingly, perceived health
-        among Sweden’s lowest income group (Q1) was <strong>63.6%</strong>,
-        compared to <strong>69%</strong> in Norway—suggesting that higher
-        hospital investment may correlate with better perceived health among
-        disadvantaged groups.
+        For instance, Sweden spent just 1.34% of GDP on hospitals in 2016,
+        significantly lower than Norway’s 3.54%. Correspondingly, perceived
+        health among Sweden’s lowest income group (Q1) was 63.6%, compared to
+        69% in Norway—suggesting that higher hospital investment may correlate
+        with better perceived health among disadvantaged groups.
       </p>
       <p>
-        Interestingly, <strong>Denmark</strong> had the
-        <strong>highest hospital expenditure</strong> at
-        <strong>4.69% of GDP</strong>, yet its Q1 perceived health score was
-        only <strong>66.0%</strong>. This might reflect higher national health
-        awareness or investment in response to existing health burdens, rather
-        than purely resulting in better outcomes.
+        Interestingly, Denmark had the highest hospital expenditure at 4.69% of
+        GDP, yet its Q1 perceived health score was only 66.0%. This might
+        reflect higher national health awareness or investment in response to
+        existing health burdens, rather than purely resulting in better
+        outcomes.
       </p>
       <p>
-        A stark contrast is visible in the <strong>United Kingdom</strong>,
-        where hospital expenditure was just <strong>1.16% of GDP</strong>, and
-        Q1 perceived health was relatively low at <strong>59.6%</strong>. On the
-        other hand, <strong>Australia</strong> spent <strong>3.65%</strong> of
-        GDP and saw a much higher Q1 perceived health score of
-        <strong>84.1%</strong>.
+        A stark contrast is visible in the United Kingdom, where hospital
+        expenditure was just 1.16% of GDP, and Q1 perceived health was
+        relatively low at 59.6%. On the other hand, Australia spent 3.65% of GDP
+        and saw a much higher Q1 perceived health score of 84.1%.
       </p>
       <p>
-        One notable outlier is <strong>Japan</strong>, which had the
-        <strong>second-highest hospital spending</strong> at
-        <strong>3.72% of GDP</strong>, yet reported the
-        <strong>lowest perceived health status</strong>: only
-        <strong>28%</strong> in Q1 and <strong>39.4%</strong> even in the
-        wealthiest quintile (Q5). This may be influenced by Japan’s aging
-        population, which likely impacts self-reported health perceptions.
+        One notable outlier is Japan, which had the second-highest hospital
+        spending at 3.72% of GDP, yet reported the lowest perceived health
+        status: only 28% in Q1 and 39.4% even in the wealthiest quintile (Q5).
+        This may be influenced by Japan’s aging population, which likely impacts
+        self-reported health perceptions.
       </p>
       <p>
-        Overall, while
-        <strong>higher spending on hospital services</strong> appears to support
+        Overall, while higher spending on hospital services appears to support
         better perceived health—especially for lower-income groups—exceptions
-        like Japan and Denmark suggest that
-        <strong>other demographic or cultural factors</strong> (e.g. aging,
-        awareness, expectations, or perhaps even climate) also shape how health
-        is perceived.
+        like Japan and Denmark suggest that other demographic or cultural
+        factors (e.g. aging, awareness, expectations, or perhaps even climate)
+        also shape how health is perceived.
       </p>
       <p>
-        <strong>Data note:</strong> All Q1 perceived health values referenced
-        are from <strong>2016</strong>, except for <strong>Australia</strong>,
-        which uses <strong>2017</strong> data due to lack of availability in
-        2016.
+        Data note: All Q1 perceived health values referenced are from 2016,
+        except for Australia, which uses 2017 data due to lack of availability
+        in 2016.
       </p>
     </section>
 
     <section class="chart">
-      <h2>2. Health Expenditure vs. Q1 Self-Reported Health</h2>
+      <h2>1. Health Expenditure vs. Q1 Self-Reported Health</h2>
       <figure>
-        <div id="scatter-q1"></div>
+        <div id="scatter-q1" class="responsive-chart"></div>
         <figcaption>
-          <strong>Figure 2.</strong> Relationship between hospital expenditure
-          (% of GDP) and perceived health status among the poorest income
-          quintile (Q1), by country (2016–2022 average where available).
+          Figure 1. Hospital spending vs. perceived health among lowest-income
+          group (Q1).
         </figcaption>
       </figure>
       <div class="analysis">
@@ -129,23 +108,21 @@
     </section>
 
     <section class="chart">
-      <h2>1. Health Expenditure vs. Q5 Self-Reported Health</h2>
+      <h2>2. Health Expenditure vs. Q5 Self-Reported Health</h2>
       <figure>
-        <div id="scatter-q5"></div>
+        <div id="scatter-q5" class="responsive-chart"></div>
         <figcaption>
-          <strong>Figure 1.</strong> Relationship between hospital expenditure
-          (% of GDP) and perceived health status among the wealthiest income
-          quintile (Q5), by country (2016–2022 average where available).
+          Figure 2. Hospital spending vs. perceived health among highest-income
+          group (Q5).
         </figcaption>
       </figure>
       <div class="analysis">
         <p>
           This scatterplot reveals a modest positive correlation between
           national health expenditure and self-reported health among the
-          wealthiest (Q5). Countries like the United States and Canada show both
-          high spending and high perceived health, while lower-spending
-          countries like Poland and Hungary show slightly lower health ratings
-          among Q5 citizens.
+          wealthiest (Q5). Countries like Canada and Norway show both high
+          spending and high perceived health, while lower-spending countries
+          like the UK and Sweden show slightly lower Q5 health ratings.
         </p>
         <p>
           However, the relationship is not perfectly linear. Some countries
@@ -158,13 +135,11 @@
     </section>
 
     <section class="chart">
-      <h2>3. Health Expenditure vs. Health Perception Gap (Q5 − Q1)</h2>
+      <h2>3. Health Expenditure vs. Perception Gap (Q5 − Q1)</h2>
       <figure>
-        <div id="scatter-gap"></div>
+        <div id="scatter-gap" class="responsive-chart"></div>
         <figcaption>
-          <strong>Figure 3.</strong> Gap in perceived health status between the
-          wealthiest (Q5) and poorest (Q1) citizens versus hospital expenditure
-          (% of GDP), by country.
+          Figure 3. Health perception inequality gap vs. hospital spending.
         </figcaption>
       </figure>
       <div class="analysis">
@@ -172,8 +147,8 @@
           This scatterplot highlights disparities in health perception by income
           group. A larger gap (Q5 − Q1) indicates greater inequality in
           self-reported health. Interestingly, some of the highest-spending
-          countries (e.g. Denmark and the US) exhibit the largest perception
-          gaps, while others with moderate spending (e.g. France, Germany)
+          countries (e.g. Denmark and Germany) exhibit the largest perception
+          gaps, while others with moderate spending (e.g. France, Australia)
           maintain more equitable outcomes.
         </p>
         <p>

@@ -2,10 +2,10 @@
 import pandas as pd
 
 # Setup
-YEAR = 2021;
+YEAR = 2020;
 
 # Load raw CSV
-df = pd.read_csv("data/dirty/hospital-expenditure-all.csv")
+df = pd.read_csv("../hospital-expenditure-all.csv")
 
 # Strip whitespace from important fields
 df["PROVIDER"] = df["PROVIDER"].astype(str).str.strip()
@@ -30,6 +30,6 @@ filtered.columns = ["Country", "Year", "Value"]
 output = filtered.groupby(["Country", "Year"], as_index=False)["Value"].max()
 
 # Save to JSON
-output.to_json(f"data/clean/hospital-expenditure-{YEAR}.json", orient="records", indent=2)
+output.to_json(f"../../clean/hospital-expenditure-{YEAR}.json", orient="records", indent=2)
 
 print(f"✅ Exported {len(output)} clean records to 'hospital-expenditure-{YEAR}.json'")

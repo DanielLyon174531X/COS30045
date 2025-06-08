@@ -1,130 +1,210 @@
-// spending-trends-chart.js
-// Author: Daniel Lyon - 174531X
+// scripts/spending-trends-chart.js
+// Author: Daniel Lyon - 174531x
+// COS30045 Assignment 3
 
-// ========== Entry Point ==========
-document.addEventListener("DOMContentLoaded", () => {
-  fetchDataAndInitDropdown("../data/clean/hospital-expenditure.json");
-});
-
-// ========== Load & Prepare ==========
-function fetchDataAndInitDropdown(url) {
-  d3.json(url)
-    .then((rawData) => {
-      const parsedData = structureDataByCountry(rawData);
-      populateDropdown(parsedData);
-      renderSingleCountryChart(parsedData, parsedData[0].country); // Initial draw
-    })
-    .catch((error) => console.error("Failed to load data:", error));
-}
-
-// ========== Structure Data ==========
-function structureDataByCountry(data) {
-  const grouped = d3.group(data, (d) => d.Country);
-  return Array.from(grouped, ([country, records]) => ({
-    country,
-    values: records
-      .filter((d) => isFinite(+d.Value) && !isNaN(+d.Year)) // ensure numeric
-      .sort((a, b) => d3.ascending(+a.Year, +b.Year))
-      .map((d) => ({
-        year: +d.Year,
-        value: +d.Value,
-      })),
-  }));
-}
-
-// ========== Dropdown Handling ==========
-function populateDropdown(dataset) {
-  const select = d3.select("#country-select");
-
-  select
-    .selectAll("option")
-    .data(dataset)
-    .enter()
-    .append("option")
-    .attr("value", (d) => d.country)
-    .text((d) => d.country);
-
-  select.on("change", function () {
-    const selectedCountry = this.value;
-    d3.select("#spending-trends-chart").select("svg").remove(); // Clear chart
-    renderSingleCountryChart(dataset, selectedCountry);
+(function () {
+  document.addEventListener("DOMContentLoaded", () => {
+    initializeSpendingTrendsChart();
   });
-}
 
-// ========== Render Single Country Chart ==========
-function renderSingleCountryChart(dataset, countryName) {
-  const countryData = dataset.find((d) => d.country === countryName);
+  const margin = { top: 40, right: 100, bottom: 60, left: 100 };
+  const height = 400;
+  const ColourA = "#377eb8";
+  const ColourB = "#e41a1c";
 
-  const width = 900;
-  const height = 500;
-  const margin = { top: 40, right: 50, bottom: 50, left: 60 };
+  function initializeSpendingTrendsChart() {
+    d3.json("../data/clean/hospital-expenditure.json").then((rawData) => {
+      const structured = structureDataByCountry(rawData);
+      populateDropdown(structured);
+      renderSpendingChart(structured, "Norway");
+    });
+  }
 
-  const svg = d3
-    .select("#spending-trends-chart")
-    .append("svg")
-    .attr("width", width)
-    .attr("height", height);
+  function structureDataByCountry(data) {
+    const grouped = d3.group(data, (d) => d.Country);
+    return Array.from(grouped, ([country, records]) => ({
+      country,
+      values: records
+        .filter((d) => isFinite(+d.Value) && !isNaN(+d.Year))
+        .sort((a, b) => d3.ascending(+a.Year, +b.Year))
+        .map((d) => ({ year: +d.Year, value: +d.Value })),
+    }));
+  }
 
-  const x = d3
-    .scaleLinear()
-    .domain(d3.extent(countryData.values, (d) => d.year)) // ← must be numeric
-    .range([margin.left, width - margin.right]);
+  function populateDropdown(dataset) {
+    const select = d3.select("#country-select");
+    select
+      .selectAll("option")
+      .data(dataset)
+      .enter()
+      .append("option")
+      .attr("value", (d) => d.country)
+      .text((d) => d.country);
 
-  const y = d3
-    .scaleLinear()
-    .domain([0, d3.max(countryData.values, (d) => d.value)])
-    .nice()
-    .range([height - margin.bottom, margin.top]);
+    select.property("value", "Norway");
 
-  // Axes
-  svg
-    .append("g")
-    .attr("transform", `translate(0,${height - margin.bottom})`)
-    .call(d3.axisBottom(x).tickFormat(d3.format("d")));
+    select.on("change", function () {
+      const selected = this.value;
+      d3.select("#spending-trends-chart").selectAll("*").remove();
+      renderSpendingChart(dataset, selected);
+    });
+  }
 
-  svg
-    .append("g")
-    .attr("transform", `translate(${margin.left},0)`)
-    .call(d3.axisLeft(y));
+  function renderSpendingChart(dataset, country) {
+    const containerId = "spending-trends-chart";
+    const container = document.getElementById(containerId);
+    container.innerHTML = "";
 
-  // Axes Labels
-  svg
-    .append("text")
-    .attr("x", width / 2)
-    .attr("y", height - 10)
-    .attr("text-anchor", "middle")
-    .attr("class", "axis-label")
-    .text("Year");
+    const data = dataset.find((d) => d.country === country).values;
+    const tooltip = createTooltip();
 
-  svg
-    .append("text")
-    .attr("transform", "rotate(-90)")
-    .attr("x", -height / 2)
-    .attr("y", margin.left - 45)
-    .attr("text-anchor", "middle")
-    .attr("class", "axis-label")
-    .text("% of GDP");
+    const fullWidth = Math.max(window.innerWidth * 0.8, 800);
+    const innerWidth = fullWidth - margin.left - margin.right;
+    const fullHeight = height + margin.top + margin.bottom;
 
-  // Title
-  svg
-    .append("text")
-    .attr("x", width / 2)
-    .attr("y", margin.top - 15)
-    .attr("text-anchor", "middle")
-    .attr("class", "chart-title")
-    .text(`Hospital Expenditure (% GDP) – ${countryName}`);
+    const x = d3
+      .scaleLinear()
+      .domain(d3.extent(data, (d) => d.year))
+      .range([0, innerWidth]);
 
-  // Line
-  const line = d3
-    .line()
-    .x((d) => x(d.year))
-    .y((d) => y(d.value));
+    const y = d3
+      .scaleLinear()
+      .domain([0, d3.max(data, (d) => d.value)])
+      .nice()
+      .range([height, 0]);
 
-  svg
-    .append("path")
-    .datum(countryData.values)
-    .attr("fill", "none")
-    .attr("stroke", "#007ACC")
-    .attr("stroke-width", 2)
-    .attr("d", line);
-}
+    const svg = d3
+      .select(`#${containerId}`)
+      .append("svg")
+      .attr(
+        "viewBox",
+        `${-margin.left} ${-margin.top} ${fullWidth} ${fullHeight}`
+      )
+      .attr("preserveAspectRatio", "xMidYMid meet")
+      .style("width", "100%")
+      .style("height", "auto");
+
+    const g = svg.append("g");
+
+    // Gridlines
+    g.append("g")
+      .attr("class", "grid")
+      .call(d3.axisLeft(y).ticks(6).tickSize(-innerWidth).tickFormat(""))
+      .selectAll("line")
+      .attr("stroke", "#ddd");
+
+    // Axes
+    const xAxis = d3
+      .axisBottom(x)
+      .ticks(data.length)
+      .tickFormat(d3.format("d"));
+
+    const yAxis = d3
+      .axisLeft(y)
+      .ticks(6)
+      .tickFormat((d) => `${d}%`);
+
+    g.append("g")
+      .attr("class", "x-axis")
+      .attr("transform", `translate(0,${height})`)
+      .call(xAxis);
+
+    g.append("g").attr("class", "y-axis").call(yAxis);
+
+    // Axis labels
+    g.append("text")
+      .attr("class", "axis-label")
+      .attr("x", innerWidth / 2)
+      .attr("y", height + 40)
+      .attr("text-anchor", "middle")
+      .text("Year");
+
+    g.append("text")
+      .attr("class", "axis-label")
+      .attr("transform", "rotate(-90)")
+      .attr("x", -height / 2)
+      .attr("y", -50)
+      .attr("text-anchor", "middle")
+      .text("% of GDP");
+
+    // Line path
+    const line = d3
+      .line()
+      .x((d) => x(d.year))
+      .y((d) => y(d.value));
+
+    const path = g
+      .append("path")
+      .datum(data)
+      .attr("fill", "none")
+      .attr("stroke", ColourA)
+      .attr("stroke-width", 2)
+      .attr("d", line);
+
+    const totalLength = path.node().getTotalLength();
+    path
+      .attr("stroke-dasharray", `${totalLength} ${totalLength}`)
+      .attr("stroke-dashoffset", totalLength)
+      .transition()
+      .duration(1000)
+      .ease(d3.easeCubic)
+      .attr("stroke-dashoffset", 0);
+
+    // Dots
+    const dots = g
+      .selectAll("circle.dot")
+      .data(data)
+      .enter()
+      .append("circle")
+      .attr("class", "dot")
+      .attr("r", 4)
+      .attr("cx", (d) => x(d.year))
+      .attr("cy", (d) => y(d.value))
+      .attr("fill", ColourB)
+      .on("mouseover", function (event, d) {
+        d3.select(this).attr("fill", "#000");
+        tooltip
+          .style("opacity", 1)
+          .html(`Year: ${d.year}<br>${d.value.toFixed(2)}% GDP`)
+          .style("left", `${event.pageX + 10}px`)
+          .style("top", `${event.pageY - 28}px`);
+      })
+      .on("mouseout", function () {
+        d3.select(this).attr("fill", ColourB);
+        tooltip.style("opacity", 0);
+      });
+
+    // Brushing
+    const brush = d3
+      .brushX()
+      .extent([
+        [0, 0],
+        [innerWidth, height],
+      ])
+      .on("end", (event) => {
+        if (!event.selection) return;
+        const [x0, x1] = event.selection;
+        const brushed = data.filter((d) => {
+          const px = x(d.year);
+          return px >= x0 && px <= x1;
+        });
+        dots.attr("fill", (d) => (brushed.includes(d) ? ColourB : "#bbb"));
+      });
+
+    g.append("g").attr("class", "brush").call(brush);
+  }
+
+  function createTooltip() {
+    return d3
+      .select("body")
+      .append("div")
+      .attr("class", "tooltip")
+      .style("position", "absolute")
+      .style("padding", "6px 12px")
+      .style("background", "#333")
+      .style("color", "#fff")
+      .style("border-radius", "4px")
+      .style("pointer-events", "none")
+      .style("opacity", 0);
+  }
+})();
